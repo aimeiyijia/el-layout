@@ -51,10 +51,6 @@ export default class extends mixins(ResizeMixin) {
     }
   }
 
-  get showSettings() {
-    return SettingsModule.showSettings
-  }
-
   get showTagsView() {
     return SettingsModule.showTagsView
   }
@@ -64,7 +60,6 @@ export default class extends mixins(ResizeMixin) {
   }
 
   beforeMount() {
-    console.log(this.config.routes)
     this.$store.dispatch('GenerateRoutes', this.config.routes)
   }
 

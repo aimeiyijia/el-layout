@@ -4,19 +4,19 @@ import defaultSettings from '@/settings'
 
 export interface ISettingsState {
   fixedHeader: boolean
-  showSettings: boolean
   showTagsView: boolean
   showSidebarLogo: boolean
-  sidebarTextTheme: boolean
+  sidebarTextTheme: boolean,
+  theme: string
 }
 
 @Module({ dynamic: true, store, name: 'settings' })
 class Settings extends VuexModule implements ISettingsState {
   public fixedHeader = defaultSettings.fixedHeader
-  public showSettings = defaultSettings.showSettings
   public showTagsView = defaultSettings.showTagsView
   public showSidebarLogo = defaultSettings.showSidebarLogo
   public sidebarTextTheme = defaultSettings.sidebarTextTheme
+  public theme = defaultSettings.theme
 
   @Mutation
   private CHANGE_SETTING(payload: { key: string, value: any }) {

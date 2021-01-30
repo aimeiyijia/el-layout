@@ -26,7 +26,7 @@
           class="sidebar-logo"
         >
         <h1 class="sidebar-title">
-          {{ title }}
+          layout
         </h1>
       </router-link>
     </transition>
@@ -35,15 +35,12 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import settings from '@/settings'
 
 @Component({
   name: 'SidebarLogo'
 })
 export default class extends Vue {
   @Prop({ required: true }) private collapse!: boolean
-
-  private title = settings.title
 }
 </script>
 
