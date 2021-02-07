@@ -7,7 +7,7 @@
     "serve": "vue-cli-service serve",
     "test:unit": "jest --clearCache && vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "build:prod": "vue-cli-service build",
+    "build": "vue-cli-service build --target lib --name el-layout ./src/layout/index.js",
     "svg": "vsvg -s ./src/icons/svg -t ./src/icons/components --ext ts --es6"
   },
   "dependencies": {
@@ -81,19 +81,5 @@
     "*.{js,jsx,vue,ts,tsx}": [
       "vue-cli-service lint"
     ]
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
   }
 }

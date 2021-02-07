@@ -1,5 +1,5 @@
 <template>
-  <ame-layout :config="config"></ame-layout>
+  <el-layout :config="config"></el-layout>
 </template>
 
 <script lang="ts">
@@ -9,7 +9,6 @@ import { constantRoutes } from '@/router/index.ts'
 
 @Component({
   name: 'layouttest',
-  // components: { layout },
 })
 export default class extends Vue {
   get config() {

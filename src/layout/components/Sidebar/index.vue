@@ -5,9 +5,6 @@
       <el-menu
         :default-active="activeMenu"
         :collapse="isCollapse"
-        :background-color="variables.menuBg"
-        :text-color="variables.menuText"
-        :active-text-color="menuActiveTextColor"
         :unique-opened="false"
         :collapse-transition="false"
         mode="vertical"
@@ -25,59 +22,46 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import { AppModule } from "@/store/modules/app";
-import { PermissionModule } from "@/store/modules/permission";
-import { SettingsModule } from "@/store/modules/settings";
-import SidebarItem from "./SidebarItem.vue";
-import SidebarLogo from "./SidebarLogo.vue";
-import variables from "@/styles/_variables.scss";
+import { Component, Vue } from 'vue-property-decorator'
+import { AppModule } from '@/layout/store/modules/app'
+import { PermissionModule } from '@/layout/store/modules/permission'
+import { SettingsModule } from '@/layout/store/modules/settings'
+import SidebarItem from './SidebarItem.vue'
+import SidebarLogo from './SidebarLogo.vue'
 
 @Component({
-  name: "SideBar",
+  name: 'SideBar',
   components: {
     SidebarItem,
-    SidebarLogo
-  }
+    SidebarLogo,
+  },
 })
 export default class extends Vue {
   get sidebar() {
-    return AppModule.sidebar;
+    return AppModule.sidebar
   }
 
   get routes() {
     console.log(PermissionModule.routes, 11)
-    return PermissionModule.routes;
+    return PermissionModule.routes
   }
 
   get showLogo() {
-    return SettingsModule.showSidebarLogo;
-  }
-
-  get menuActiveTextColor() {
-    if (SettingsModule.sidebarTextTheme) {
-      return SettingsModule.theme;
-    } else {
-      return variables.menuActiveText;
-    }
-  }
-
-  get variables() {
-    return variables;
+    return SettingsModule.showSidebarLogo
   }
 
   get activeMenu() {
-    const route = this.$route;
-    const { meta, path } = route;
+    const route = this.$route
+    const { meta, path } = route
     // if set path, the sidebar will highlight the path you set
     if (meta.activeMenu) {
-      return meta.activeMenu;
+      return meta.activeMenu
     }
-    return path;
+    return path
   }
 
   get isCollapse() {
-    return !this.sidebar.opened;
+    return !this.sidebar.opened
   }
 }
 </script>

@@ -4,18 +4,16 @@ import 'normalize.css'
 import ElementUI from 'element-ui'
 import SvgIcon from 'vue-svgicon'
 
-import '@/styles/element-variables.scss'
-import '@/styles/index.scss'
+import 'element-ui/lib/theme-chalk/index.css'
 
 import App from '@/App.vue'
 import router from '@/router'
-import store from '@/store'
 import '@/icons/components'
 
-import ameLayout from '@/layout/index.js'
+import { ElLayout, ElLayoutStore } from '@/layout/index.js'
 
 Vue.use(ElementUI)
-Vue.use(ameLayout)
+Vue.use(ElLayout)
 Vue.use(SvgIcon, {
   tagName: 'svg-icon',
   defaultWidth: '1em',
@@ -26,6 +24,6 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
-  store,
+  store: ElLayoutStore,
   render: h => h(App),
 }).$mount('#app')

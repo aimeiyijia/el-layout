@@ -1,13 +1,13 @@
-import Component from './index.vue'
-import layoutStore from '@/store'
+import ElLayout from './index.vue'
+import ElLayoutStore from '@/layout/store'
 
 function install(Vue, options = {}) {
   if (install.installed) return
   install.installed = true
 
-  Vue.component('ame-layout', Component)
+  Vue.component('el-layout', ElLayout)
 }
-Component.install = install
+ElLayout.install = install
 
 // auto plugin install
 let GlobalVue = null
@@ -17,8 +17,8 @@ if (typeof window !== 'undefined') {
   GlobalVue = global.vue
 }
 if (GlobalVue) {
-  GlobalVue.use(Component)
+  GlobalVue.use(ElLayout)
 }
 
 // export default
-export default Component
+export { ElLayout, ElLayoutStore }

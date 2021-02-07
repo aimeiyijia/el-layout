@@ -1,6 +1,6 @@
 import { VuexModule, Module, Mutation, Action, getModule } from 'vuex-module-decorators'
-import store from '@/store'
-import defaultSettings from '@/settings'
+import store from '@/layout/store'
+import defaultSettings from '@/layout/settings'
 
 export interface ISettingsState {
   fixedHeader: boolean

@@ -15,4 +15,6 @@ const settings: ISettings = {
   theme: '#fff'
 }
 
+
+
 export default settings

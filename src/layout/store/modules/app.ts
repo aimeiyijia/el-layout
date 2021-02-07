@@ -1,5 +1,5 @@
 import { VuexModule, Module, Mutation, Action, getModule } from 'vuex-module-decorators'
-import store from '@/store'
+import store from '@/layout/store'
 
 export enum DeviceType {
   Mobile,

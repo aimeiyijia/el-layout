@@ -6,12 +6,9 @@
       class="hamburger-container"
       @toggle-click="toggleSideBar"
     />
-    <breadcrumb
-      id="breadcrumb-container"
-      class="breadcrumb-container"
-    />
+    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
     <div class="right-menu">
-      <template v-if="device!=='mobile'">
+      <template v-if="device !== 'mobile'">
         <header-search class="right-menu-item" />
         <screenfull class="right-menu-item hover-effect" />
       </template>
@@ -20,7 +17,9 @@
         trigger="click"
       >
         <div class="avatar-wrapper">
-          <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+          <el-avatar
+            src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+          ></el-avatar>
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu></el-dropdown-menu>
@@ -31,11 +30,11 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { AppModule } from '@/store/modules/app'
-import Breadcrumb from '@/components/Breadcrumb/index.vue'
-import Hamburger from '@/components/Hamburger/index.vue'
-import HeaderSearch from '@/components/HeaderSearch/index.vue'
-import Screenfull from '@/components/Screenfull/index.vue'
+import { AppModule } from '@/layout/store/modules/app'
+import Breadcrumb from '@/layout/components/Breadcrumb/index.vue'
+import Hamburger from '@/layout/components/Hamburger/index.vue'
+import HeaderSearch from '@/layout/components/HeaderSearch/index.vue'
+import Screenfull from '@/layout/components/Screenfull/index.vue'
 
 @Component({
   name: 'Navbar',
@@ -43,8 +42,8 @@ import Screenfull from '@/components/Screenfull/index.vue'
     Breadcrumb,
     Hamburger,
     HeaderSearch,
-    Screenfull
-  }
+    Screenfull,
+  },
 })
 export default class extends Vue {
   get sidebar() {
@@ -67,7 +66,7 @@ export default class extends Vue {
   overflow: hidden;
   position: relative;
   background: #fff;
-  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
   .hamburger-container {
     line-height: 46px;
@@ -75,11 +74,11 @@ export default class extends Vue {
     float: left;
     padding: 0 15px;
     cursor: pointer;
-    transition: background .3s;
-    -webkit-tap-highlight-color:transparent;
+    transition: background 0.3s;
+    -webkit-tap-highlight-color: transparent;
 
     &:hover {
-      background: rgba(0, 0, 0, .025)
+      background: rgba(0, 0, 0, 0.025);
     }
   }
 
@@ -111,10 +110,10 @@ export default class extends Vue {
 
       &.hover-effect {
         cursor: pointer;
-        transition: background .3s;
+        transition: background 0.3s;
 
         &:hover {
-          background: rgba(0, 0, 0, .025)
+          background: rgba(0, 0, 0, 0.025);
         }
       }
     }
