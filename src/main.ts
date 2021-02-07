@@ -10,7 +10,8 @@ import App from '@/App.vue'
 import router from '@/router'
 import '@/icons/components'
 
-import { ElLayout, ElLayoutStore } from '@/layout/index.js'
+import { ElLayout, ElLayoutStore } from '@/layout/index'
+import '@/layout/styles/index.scss'
 
 Vue.use(ElementUI)
 Vue.use(ElLayout)

@@ -13,7 +13,10 @@ import { constantRoutes } from '@/router/index.ts'
 export default class extends Vue {
   get config() {
     return {
-      routes: constantRoutes
+      routes: constantRoutes,
+      stycfg: {
+        sideBarWidth: '4000px',
+      },
     }
   }
 }

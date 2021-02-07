@@ -18,6 +18,7 @@
 
 <script lang="ts">
 import '@/layout/styles/index.scss'
+import { ISettings, IStyCfg } from '@/layout/settings'
 import { Component, Prop } from 'vue-property-decorator'
 import { mixins } from 'vue-class-component'
 import { RouteConfig } from 'vue-router'
@@ -26,9 +27,10 @@ import { SettingsModule } from '@/layout/store/modules/settings'
 import { AppMain, Navbar, Sidebar, TagsView } from './components'
 import ResizeMixin from './mixin/resize'
 
-interface Config {
+interface IConfig {
   routes: RouteConfig[]
-  setting?: []
+  setting?: ISettings
+  stycfg?: IStyCfg
 }
 
 @Component({
@@ -41,7 +43,7 @@ interface Config {
   },
 })
 export default class extends mixins(ResizeMixin) {
-  @Prop({ default: () => [] }) readonly config!: Config
+  @Prop({ default: () => [] }) readonly config!: IConfig
 
   get classObj() {
     return {
@@ -61,7 +63,27 @@ export default class extends mixins(ResizeMixin) {
   }
 
   beforeMount() {
+    // 设置菜单
     this.$store.dispatch('GenerateRoutes', this.config.routes)
+
+    // 传入设置
+    for (let key in this.config.stycfg) {
+      this.$store.dispatch('ChangeSetting', {
+        key: key,
+        value: (this.config.stycfg as any)[key],
+      })
+    }
+    console.log(SettingsModule)
+  }
+
+  mounted() {
+    this.$nextTick(function () {
+      // 改变
+      document.body.style.setProperty('--sideBarWidth', '210px')
+      document.body.style.setProperty('--subMenuActiveTextColor', '#f4f4f5')
+      document.body.style.setProperty('--subMenuBg', '#1f2d3d')
+      document.body.style.setProperty('--subMenuHover', '#001528')
+    })
   }
 
   private handleClickOutside() {
@@ -95,15 +117,13 @@ export default class extends mixins(ResizeMixin) {
 .main-container {
   min-height: 100%;
   transition: margin-left 0.28s;
-  // margin-left: $sideBarWidth;
-  margin-left: 210px;
+  margin-left: var(--sideBarWidth, 210px);
   position: relative;
 }
 
 .sidebar-container {
   transition: width 0.28s;
-  // width: $sideBarWidth !important;
-  width: 210px !important;
+  width: var(--sideBarWidth, 210px) !important;
   height: 100%;
   position: fixed;
   font-size: 0px;
@@ -119,8 +139,7 @@ export default class extends mixins(ResizeMixin) {
   top: 0;
   right: 0;
   z-index: 9;
-  // width: calc(100% - #{$sideBarWidth});
-  width: calc(100% - 210px);
+  width: calc(100% - var(--sideBarWidth, 210px));
   transition: width 0.28s;
 }
 
@@ -146,8 +165,7 @@ export default class extends mixins(ResizeMixin) {
 
   .sidebar-container {
     transition: transform 0.28s;
-    // width: $sideBarWidth !important;
-    width: 210px !important;
+    width: var(--sideBarWidth, 210px) !important;
   }
 
   &.openSidebar {
@@ -159,8 +177,7 @@ export default class extends mixins(ResizeMixin) {
     .sidebar-container {
       pointer-events: none;
       transition-duration: 0.3s;
-      // transform: translate3d(-$sideBarWidth, 0, 0);
-      transform: translate3d(-210px, 0, 0);
+      transform: translate3d(var(--sideBarWidth, 210px), 0, 0);
     }
   }
 

@@ -120,6 +120,22 @@ export default class extends Vue {
 </script>
 
 <style lang="scss">
+.el-submenu.is-active > .el-submenu__title {
+  color: var(--subMenuActiveText, #f4f4f5) !important;
+}
+
+.full-mode {
+  .nest-menu .el-submenu > .el-submenu__title,
+  .el-submenu .el-menu-item {
+    min-width: var(--sideBarWidth, 210px) !important;
+    background-color: var(--subMenuBg, #1f2d3d) !important;
+
+    &:hover {
+      background-color: var(--subMenuHover, #001528) !important;
+    }
+  }
+}
+
 .simple-mode {
   &.first-level {
     .submenu-title-noDropdown {

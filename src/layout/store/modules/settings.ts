@@ -6,17 +6,24 @@ export interface ISettingsState {
   fixedHeader: boolean
   showTagsView: boolean
   showSidebarLogo: boolean
-  sidebarTextTheme: boolean,
-  theme: string
 }
 
 @Module({ dynamic: true, store, name: 'settings' })
 class Settings extends VuexModule implements ISettingsState {
+  // 页面功能配置
   public fixedHeader = defaultSettings.fixedHeader
   public showTagsView = defaultSettings.showTagsView
   public showSidebarLogo = defaultSettings.showSidebarLogo
-  public sidebarTextTheme = defaultSettings.sidebarTextTheme
-  public theme = defaultSettings.theme
+
+  // 页面样式配置
+  public sideBarWidth = defaultSettings.sideBarWidth
+  public subMenuBgColor = defaultSettings.subMenuBgColor
+  public subMenuHoverColor = defaultSettings.subMenuHoverColor
+  public subMenuActiveTextColor = defaultSettings.subMenuActiveTextColor
+  public menuBgColor = defaultSettings.menuBgColor
+  public menuTextColor = defaultSettings.menuTextColor
+  public menuActiveTextColor = defaultSettings.menuActiveTextColor
+
 
   @Mutation
   private CHANGE_SETTING(payload: { key: string, value: any }) {

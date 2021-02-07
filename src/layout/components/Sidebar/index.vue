@@ -5,6 +5,9 @@
       <el-menu
         :default-active="activeMenu"
         :collapse="isCollapse"
+        :background-color="menuBgColor"
+        :text-color="menuTextColor"
+        :active-text-color="menuActiveTextColor"
         :unique-opened="false"
         :collapse-transition="false"
         mode="vertical"
@@ -48,6 +51,15 @@ export default class extends Vue {
 
   get showLogo() {
     return SettingsModule.showSidebarLogo
+  }
+  get menuBgColor() {
+    return SettingsModule.menuBgColor
+  }
+  get menuTextColor() {
+    return SettingsModule.menuTextColor
+  }
+  get menuActiveTextColor() {
+    return SettingsModule.menuActiveTextColor
   }
 
   get activeMenu() {
