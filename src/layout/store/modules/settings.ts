@@ -30,6 +30,7 @@ class Settings extends VuexModule implements ISettingsState {
     const { key, value } = payload
     if (Object.prototype.hasOwnProperty.call(this, key)) {
       (this as any)[key] = value
+      document.body.style.setProperty(`--${key}`, value)
     }
   }
 

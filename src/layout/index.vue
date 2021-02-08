@@ -19,13 +19,14 @@
 <script lang="ts">
 import '@/layout/styles/index.scss'
 import { ISettings, IStyCfg } from '@/layout/settings'
-import { Component, Prop } from 'vue-property-decorator'
+import { Component, Prop, Watch} from 'vue-property-decorator'
 import { mixins } from 'vue-class-component'
 import { RouteConfig } from 'vue-router'
 import { DeviceType, AppModule } from '@/layout/store/modules/app'
 import { SettingsModule } from '@/layout/store/modules/settings'
 import { AppMain, Navbar, Sidebar, TagsView } from './components'
 import ResizeMixin from './mixin/resize'
+import { watch } from 'fs'
 
 interface IConfig {
   routes: RouteConfig[]
@@ -73,17 +74,6 @@ export default class extends mixins(ResizeMixin) {
         value: (this.config.stycfg as any)[key],
       })
     }
-    console.log(SettingsModule)
-  }
-
-  mounted() {
-    this.$nextTick(function () {
-      // 改变
-      document.body.style.setProperty('--sideBarWidth', '210px')
-      document.body.style.setProperty('--subMenuActiveTextColor', '#f4f4f5')
-      document.body.style.setProperty('--subMenuBg', '#1f2d3d')
-      document.body.style.setProperty('--subMenuHover', '#001528')
-    })
   }
 
   private handleClickOutside() {
@@ -177,7 +167,7 @@ export default class extends mixins(ResizeMixin) {
     .sidebar-container {
       pointer-events: none;
       transition-duration: 0.3s;
-      transform: translate3d(var(--sideBarWidth, 210px), 0, 0);
+      transform: translate3d(calc(var(--sideBarWidth, 210px) * -1), 0, 0);
     }
   }
 

@@ -22,7 +22,7 @@ export const constantRoutes: RouteConfig[] = [
   {
     path: '/permission',
     component: () => import('@/layouttest/index.vue'),
-    redirect: '/permission/directive',
+    redirect: '/permission/page',
     meta: {
       title: '测试父菜单',
       icon: 'lock',
@@ -35,6 +35,7 @@ export const constantRoutes: RouteConfig[] = [
         component: () => import(/* webpackChunkName: "login" */ '@/views/login/index.vue'),
         name: 'PagePermission',
         meta: {
+          activeMenu: '/permission/page',
           title: '测试子菜单1',
           roles: ['admin'] // or you can only set roles in sub nav
         }
@@ -46,7 +47,16 @@ export const constantRoutes: RouteConfig[] = [
         meta: {
           title: '测试子菜单2',
           roles: ['admin']
-          // if do not set roles, means: this page does not require permission
+        }
+      },
+      {
+        path: 'caseDetail',
+        component: () => import(/* webpackChunkName: "login" */ '@/views/login/index.vue'),
+        name: 'DirectivePermission123',
+        meta: {
+          hidden: true,
+          title: '测试子菜单3',
+          roles: ['admin']
         }
       }
     ]

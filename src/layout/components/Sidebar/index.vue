@@ -65,8 +65,10 @@ export default class extends Vue {
   get activeMenu() {
     const route = this.$route
     const { meta, path } = route
+    console.log(this.$route)
     // if set path, the sidebar will highlight the path you set
     if (meta.activeMenu) {
+      console.log(meta.activeMenu, 12)
       return meta.activeMenu
     }
     return path

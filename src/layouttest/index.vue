@@ -15,7 +15,7 @@ export default class extends Vue {
     return {
       routes: constantRoutes,
       stycfg: {
-        sideBarWidth: '4000px',
+        sideBarWidth: '210px',
       },
     }
   }
