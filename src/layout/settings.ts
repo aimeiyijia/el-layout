@@ -30,7 +30,7 @@ const stycfg: IStyCfg = {
   menuBgColor: '#304156',
   menuTextColor: '#bfcbd9',
   menuActiveTextColor: '#409EFF',
-  tagActiveColor: '#42b9'
+  tagActiveColor: '#42b984'
 }
 
 const defaultSettings = Object.assign(settings, stycfg)
