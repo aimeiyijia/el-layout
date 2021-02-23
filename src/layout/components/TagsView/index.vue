@@ -65,6 +65,10 @@ export default class extends Vue {
     return (this.$refs.scrollPane as Vue).$refs.scrollContainer as ElScrollbar
   }
 
+  get scrollPane() {
+    return this.$refs.scrollPane as Vue
+  }
+
   get visitedViews() {
     return TagsViewModule.visitedViews
   }
@@ -107,7 +111,27 @@ export default class extends Vue {
 
   // 触发滚动条的更新事件
   private scrollUpdate(): void {
-    this.scrollContainer.update()
+    this.$nextTick(function() {
+      this.scrollContainer.update()
+
+      const scrollContainerWidth = this.scrollContainer.$el.getBoundingClientRect().width
+
+      const tags: HTMLCollection[] = this.scrollPane.$el.getElementsByClassName(
+        'tags-view-item'
+      )
+      let tagsWidth = 0
+      tags.forEach(o => {
+        const elWidth = o.getBoundingClientRect().width
+        tagsWidth = elWidth + tagsWidth
+      })
+      if (tagsWidth > scrollContainerWidth) {
+        (this.scrollPane as ScrollPane).isSwitchShow = true
+        this.moveToCurrentTag()
+      } else {
+        (this.scrollPane as ScrollPane).isSwitchShow = false
+        this.moveToCurrentTag()
+      }
+    })
   }
 
   private isActive(route: ITagView) {
@@ -321,11 +345,11 @@ export default class extends Vue {
       margin-top: 4px;
 
       &:first-of-type {
-        margin-left: 15px;
+        margin-left: 0px;
       }
 
       &:last-of-type {
-        margin-right: 15px;
+        margin-right: 0px;
       }
 
       &.active {
