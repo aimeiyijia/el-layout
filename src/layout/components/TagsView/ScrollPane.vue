@@ -10,6 +10,7 @@
       :vertical="false"
       :noresize="true"
       class="scroll-container"
+      :class="{'tag-show': isSwitchShow}"
       @wheel.native.prevent="handleScroll"
     >
       <slot />
@@ -50,13 +51,6 @@ export default class extends Vue {
 
   beforeDestroy() {
     this.scrollWrapper.removeEventListener('scroll', this.emitScroll)
-  }
-
-  private getStyle(ele: any, attr: any) {
-    if (window.getComputedStyle) {
-      return window.getComputedStyle(ele, null)[attr]
-    }
-    return ele.currentStyle[attr]
   }
 
   private handleScroll(e: WheelEvent) {
@@ -140,8 +134,11 @@ export default class extends Vue {
   white-space: nowrap;
   position: relative;
   overflow: hidden;
-  width: calc(100% - 60px);
+  width: calc(100% - 0px);
   vertical-align: middle;
+  &.tag-show {
+    width: calc(100% - 60px);
+  }
 }
 .switch {
   height: 32px;

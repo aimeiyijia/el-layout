@@ -124,7 +124,10 @@ export default class extends Vue {
         const elWidth = o.getBoundingClientRect().width
         tagsWidth = elWidth + tagsWidth
       })
-      if (tagsWidth > scrollContainerWidth) {
+      // tag平均宽度
+      const tagAverageWidth = tagsWidth / this.visitedViews.length
+      // 当容器宽与总tag元素宽相差半个tag平均宽度时显示左右切换
+      if (scrollContainerWidth - tagsWidth < tagAverageWidth / 2) {
         (this.scrollPane as ScrollPane).isSwitchShow = true
         this.moveToCurrentTag()
       } else {
