@@ -45,6 +45,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 import { RouteConfig } from 'vue-router'
 import { PermissionModule } from '@/layout/store/modules/permission'
 import { TagsViewModule, ITagView } from '@/layout/store/modules/tags-view'
+import { Scrollbar as ElScrollbar } from 'element-ui'
 import ScrollPane from './ScrollPane.vue'
 
 @Component({
@@ -59,6 +60,10 @@ export default class extends Vue {
   private left = 0
   private selectedTag: ITagView = {}
   private affixTags: ITagView[] = []
+
+  get scrollContainer() {
+    return (this.$refs.scrollPane as Vue).$refs.scrollContainer as ElScrollbar
+  }
 
   get visitedViews() {
     return TagsViewModule.visitedViews
@@ -98,6 +103,11 @@ export default class extends Vue {
     //     query: { jj: 456 }
     //   })
     // }, 5000)
+  }
+
+  // 触发滚动条的更新事件
+  private scrollUpdate(): void {
+    this.scrollContainer.update()
   }
 
   private isActive(route: ITagView) {
@@ -145,6 +155,7 @@ export default class extends Vue {
     if (name) {
       TagsViewModule.addView(this.$route)
     }
+    this.scrollUpdate()
     return false
   }
 
@@ -167,10 +178,11 @@ export default class extends Vue {
   private refreshSelectedTag(view: ITagView) {
     TagsViewModule.delCachedView(view)
     const { fullPath } = view
+    this.scrollUpdate()
     this.$nextTick(() => {
       this.$router
         .replace({
-          path: '/redirect' + fullPath
+          path: fullPath
         })
         .catch(err => {
           console.warn(err)
@@ -183,6 +195,7 @@ export default class extends Vue {
     if (this.isActive(view)) {
       this.toLastView(TagsViewModule.visitedViews, view)
     }
+    this.scrollUpdate()
   }
 
   private closeOthersTags() {
@@ -196,6 +209,7 @@ export default class extends Vue {
     }
     TagsViewModule.delOthersViews(this.selectedTag)
     this.moveToCurrentTag()
+    this.scrollUpdate()
   }
 
   private closeAllTags(view: ITagView) {
@@ -227,6 +241,7 @@ export default class extends Vue {
         })
       }
     }
+    this.scrollUpdate()
   }
 
   private openMenu(tag: ITagView, e: MouseEvent) {

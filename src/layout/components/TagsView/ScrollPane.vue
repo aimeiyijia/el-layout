@@ -2,6 +2,7 @@
   <el-scrollbar
     ref="scrollContainer"
     :vertical="false"
+    :noresize="true"
     class="scroll-container"
     @wheel.native.prevent="handleScroll"
   >
@@ -86,7 +87,10 @@ export default class extends Vue {
   }
 
   .el-scrollbar__wrap {
-    height: 49px;
+    height: 54px;
+  }
+  .el-scrollbar__thumb {
+    background-color: rgba(144,147,153,.2);
   }
 }
 </style>
