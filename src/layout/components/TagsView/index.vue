@@ -41,8 +41,10 @@
 
 <script lang="ts">
 import path from 'path'
+import _ from 'lodash'
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { RouteConfig } from 'vue-router'
+import { AppModule } from '@/layout/store/modules/app'
 import { PermissionModule } from '@/layout/store/modules/permission'
 import { TagsViewModule, ITagView } from '@/layout/store/modules/tags-view'
 import { Scrollbar as ElScrollbar } from 'element-ui'
@@ -77,6 +79,10 @@ export default class extends Vue {
     return PermissionModule.routes
   }
 
+  get sidebar() {
+    return AppModule.sidebar
+  }
+
   @Watch('$route', { deep: true })
   private onRouteChange() {
     this.addTags()
@@ -92,49 +98,52 @@ export default class extends Vue {
     }
   }
 
+  @Watch('sidebar', { deep: true })
+  private sidebarStatusChanged() {
+    this.scrollUpdate()
+  }
+
   mounted() {
     this.initTags()
     this.addTags()
-    // setTimeout(() => {
-    //   this.$router.push({
-    //     name: 'DirectivePermission123',
-    //     query: { jj: 123 }
-    //   })
-    // }, 2000)
-    // setTimeout(() => {
-    //   this.$router.push({
-    //     name: 'DirectivePermission123',
-    //     query: { jj: 456 }
-    //   })
-    // }, 5000)
+    window.addEventListener('resize', _.debounce(this.scrollUpdate, 150))
+  }
+
+  beforeDestroy() {
+    window.removeEventListener('resize', _.debounce(this.scrollUpdate, 150))
   }
 
   // 触发滚动条的更新事件
   private scrollUpdate(): void {
+    console.log('更新')
     this.$nextTick(function() {
       this.scrollContainer.update()
-
-      const scrollContainerWidth = this.scrollContainer.$el.getBoundingClientRect().width
-
-      const tags: HTMLCollection[] = this.scrollPane.$el.getElementsByClassName(
-        'tags-view-item'
-      )
-      let tagsWidth = 0
-      tags.forEach(o => {
-        const elWidth = o.getBoundingClientRect().width
-        tagsWidth = elWidth + tagsWidth
-      })
-      // tag平均宽度
-      const tagAverageWidth = tagsWidth / this.visitedViews.length
-      // 当容器宽与总tag元素宽相差半个tag平均宽度时显示左右切换
-      if (scrollContainerWidth - tagsWidth < tagAverageWidth / 2) {
-        (this.scrollPane as ScrollPane).isSwitchShow = true
-        this.moveToCurrentTag()
-      } else {
-        (this.scrollPane as ScrollPane).isSwitchShow = false
-        this.moveToCurrentTag()
-      }
+      this.isSwitchShow()
     })
+  }
+
+  private isSwitchShow() {
+    const scrollContainerWidth = this.scrollContainer.$el.getBoundingClientRect()
+      .width
+
+    const tags: HTMLCollection[] = this.scrollPane.$el.getElementsByClassName(
+      'tags-view-item'
+    )
+    let tagsWidth = 0
+    tags.forEach(o => {
+      const elWidth = o.getBoundingClientRect().width
+      tagsWidth = elWidth + tagsWidth
+    })
+    // tag平均宽度
+    const tagAverageWidth = tagsWidth / this.visitedViews.length
+    // 当容器宽与总tag元素宽相差半个tag平均宽度时显示左右切换
+    if (scrollContainerWidth - tagsWidth < tagAverageWidth / 4) {
+      (this.scrollPane as ScrollPane).isSwitchShow = true
+      this.moveToCurrentTag()
+    } else {
+      (this.scrollPane as ScrollPane).isSwitchShow = false
+      this.moveToCurrentTag()
+    }
   }
 
   private isActive(route: ITagView) {

@@ -5,6 +5,10 @@
 
 /* Global scss */
 
+html {
+  overflow: hidden;
+}
+
 body {
   height: 100%;
   -moz-osx-font-smoothing: grayscale;

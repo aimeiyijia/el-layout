@@ -56,6 +56,7 @@ export default class extends Vue {
 
   private toggleSideBar() {
     AppModule.ToggleSideBar(false)
+    console.log(this.sidebar)
   }
 }
 </script>

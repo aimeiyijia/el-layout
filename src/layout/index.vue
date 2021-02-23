@@ -6,7 +6,7 @@
       @click="handleClickOutside"
     />
     <sidebar class="sidebar-container" />
-    <div :class="{hasTagsView: showTagsView}" class="main-container">
+    <div :class="{hasTagsView: showTagsView, sidebarOpen: sidebar.opened}" class="main-container">
       <div :class="{'fixed-header': fixedHeader}">
         <navbar />
         <tags-view v-if="showTagsView" />
@@ -116,7 +116,11 @@ export default class extends mixins(ResizeMixin) {
   min-height: 100%;
   transition: margin-left 0.28s;
   margin-left: var(--sideBarWidth, 210px);
+  width: calc(100% - 54px);
   position: relative;
+  &.sidebarOpen {
+    width: calc(100% - 210px);
+  }
 }
 
 .sidebar-container {

@@ -12,12 +12,14 @@
     "build": "vue-cli-service build --target lib --name el-layout ./src/layout/index.js"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.168",
     "codemirror": "^5.58.2",
     "core-js": "^3.7.0",
     "cors": "^2.8.5",
     "element-ui": "^2.14.0",
     "fuse.js": "^6.4.3",
     "jsonlint": "^1.6.3",
+    "lodash": "^4.17.21",
     "normalize.css": "^8.0.1",
     "path-to-regexp": "^6.2.0",
     "screenfull": "^5.1.0",
