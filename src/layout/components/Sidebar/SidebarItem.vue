@@ -128,10 +128,10 @@ export default class extends Vue {
   .nest-menu .el-submenu > .el-submenu__title,
   .el-submenu .el-menu-item {
     min-width: var(--sideBarWidth, 210px) !important;
-    background-color: var(--subMenuBg, #1f2d3d) !important;
+    background-color: var(--subMenuBgColor, #1f2d3d) !important;
 
     &:hover {
-      background-color: var(--subMenuHover, #001528) !important;
+      background-color: var(--subMenuHoverColor, #001528) !important;
     }
   }
 }

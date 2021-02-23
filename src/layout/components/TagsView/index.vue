@@ -314,9 +314,9 @@ export default class extends Vue {
       }
 
       &.active {
-        background-color: #42b983;
+        background-color: var(--tagActiveColor, #42b983);
         color: #fff;
-        border-color: #42b983;
+        border-color: var(--tagActiveColor, #42b983);
 
         &::before {
           content: '';

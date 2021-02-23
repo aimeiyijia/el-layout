@@ -12,7 +12,6 @@ import { constantRoutes } from '@/router/index.ts'
 })
 export default class extends Vue {
   get config() {
-    console.log(constantRoutes, '路由')
     return {
       routes: constantRoutes,
       stycfg: {

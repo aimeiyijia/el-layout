@@ -11,6 +11,7 @@ export interface IStyCfg {
   menuBgColor: string
   menuTextColor: string
   menuActiveTextColor: string
+  tagActiveColor: string
 }
 
 // 页面功能配置
@@ -28,7 +29,8 @@ const stycfg: IStyCfg = {
   subMenuActiveTextColor: '#f4f4f5',
   menuBgColor: '#304156',
   menuTextColor: '#bfcbd9',
-  menuActiveTextColor: '#409EFF'
+  menuActiveTextColor: '#409EFF',
+  tagActiveColor: '#42b9'
 }
 
 const defaultSettings = Object.assign(settings, stycfg)

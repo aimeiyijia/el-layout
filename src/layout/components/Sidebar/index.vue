@@ -71,7 +71,6 @@ export default class extends Vue {
     if (meta.relateActive) {
       return meta.relateActive
     }
-    // if set path, the sidebar will highlight the path you set
     if (meta.activeMenu) {
       return meta.activeMenu
     }

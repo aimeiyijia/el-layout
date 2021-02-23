@@ -18,7 +18,8 @@
 
 <script lang="ts">
 import '@/layout/styles/index.scss'
-import { ISettings, IStyCfg } from '@/layout/settings'
+import defaultSettings, { ISettings, IStyCfg } from '@/layout/settings'
+
 import { Component, Prop } from 'vue-property-decorator'
 import { mixins } from 'vue-class-component'
 import { RouteConfig } from 'vue-router'
@@ -29,7 +30,7 @@ import ResizeMixin from './mixin/resize'
 
 interface IConfig {
   routes: RouteConfig[]
-  setting?: ISettings
+  settings?: ISettings
   stycfg?: IStyCfg
 }
 
@@ -66,13 +67,21 @@ export default class extends mixins(ResizeMixin) {
     // 设置菜单
     this.$store.dispatch('GenerateRoutes', this.config.routes)
 
+    const setting = Object.assign(defaultSettings, this.config.stycfg, this.config.settings)
     // 传入设置
-    for (const key in this.config.stycfg) {
+    for (const key in setting) {
       this.$store.dispatch('ChangeSetting', {
         key: key,
-        value: (this.config.stycfg as any)[key]
+        value: (setting as any)[key]
       })
     }
+    // // 传入设置
+    // for (const key in this.config.stycfg) {
+    //   this.$store.dispatch('ChangeSetting', {
+    //     key: key,
+    //     value: (this.config.stycfg as any)[key]
+    //   })
+    // }
   }
 
   private handleClickOutside() {
