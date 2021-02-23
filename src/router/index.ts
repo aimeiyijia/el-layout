@@ -3,6 +3,21 @@ import VueRouter, { RouteConfig } from 'vue-router'
 
 Vue.use(VueRouter)
 
+const arr = []
+for (let i = 0; i < 20; i++){
+  arr.push({
+    path: 'directive0'+ i,
+    component: () => import(/* webpackChunkName: "login" */ '@/views/login/index.vue'),
+    name: 'DirectivePermission0'+i,
+    meta: {
+      title: '测试子菜单0'+i,
+      roles: ['admin']
+    }
+  },)
+}
+console.log(arr)
+
+
 export const constantRoutes: RouteConfig[] = [
   {
     path: '/login',
@@ -30,15 +45,7 @@ export const constantRoutes: RouteConfig[] = [
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },
-      {
-        path: 'directive',
-        component: () => import(/* webpackChunkName: "login" */ '@/views/login/index.vue'),
-        name: 'DirectivePermission',
-        meta: {
-          title: '测试子菜单2',
-          roles: ['admin']
-        }
-      },
+      ...arr,
       {
         path: 'caseDetail',
         component: () => import(/* webpackChunkName: "login" */ '@/views/login/test.vue'),

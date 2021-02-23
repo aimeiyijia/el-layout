@@ -86,18 +86,18 @@ export default class extends Vue {
   mounted() {
     this.initTags()
     this.addTags()
-    setTimeout(() => {
-      this.$router.push({
-        name: 'DirectivePermission123',
-        query: { jj: 123 }
-      })
-    }, 2000)
-    setTimeout(() => {
-      this.$router.push({
-        name: 'DirectivePermission123',
-        query: { jj: 456 }
-      })
-    }, 5000)
+    // setTimeout(() => {
+    //   this.$router.push({
+    //     name: 'DirectivePermission123',
+    //     query: { jj: 123 }
+    //   })
+    // }, 2000)
+    // setTimeout(() => {
+    //   this.$router.push({
+    //     name: 'DirectivePermission123',
+    //     query: { jj: 456 }
+    //   })
+    // }, 5000)
   }
 
   private isActive(route: ITagView) {
