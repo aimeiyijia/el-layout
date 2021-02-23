@@ -10,7 +10,7 @@
         ref="tag"
         :key="tag.path"
         :class="isActive(tag) ? 'active' : ''"
-        :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
+        :to="{path: tag.path, query: tag.query, fullPath: tag.fullPath}"
         tag="span"
         class="tags-view-item"
         @click.middle.native="!isAffix(tag) ? closeSelectedTag(tag) : ''"
@@ -26,7 +26,7 @@
     </scroll-pane>
     <ul
       v-show="visible"
-      :style="{ left: left + 'px', top: top + 'px' }"
+      :style="{left: left + 'px', top: top + 'px'}"
       class="contextmenu"
     >
       <li @click="refreshSelectedTag(selectedTag)">刷新</li>
@@ -50,8 +50,8 @@ import ScrollPane from './ScrollPane.vue'
 @Component({
   name: 'TagsView',
   components: {
-    ScrollPane,
-  },
+    ScrollPane
+  }
 })
 export default class extends Vue {
   private visible = false
@@ -68,7 +68,7 @@ export default class extends Vue {
     return PermissionModule.routes
   }
 
-  @Watch('$route')
+  @Watch('$route', { deep: true })
   private onRouteChange() {
     this.addTags()
     this.moveToCurrentTag()
@@ -87,12 +87,17 @@ export default class extends Vue {
     this.initTags()
     this.addTags()
     // setTimeout(() => {
-    //   console.log(this.$router)
     //   this.$router.push({
     //     name: 'DirectivePermission123',
+    //     query: { jj: 123 }
     //   })
-    //   TagsViewModule.addView(this.$route)
     // }, 2000)
+    // setTimeout(() => {
+    //   this.$router.push({
+    //     name: 'DirectivePermission123',
+    //     query: { jj: 456 }
+    //   })
+    // }, 5000)
   }
 
   private isActive(route: ITagView) {
@@ -112,7 +117,7 @@ export default class extends Vue {
           fullPath: tagPath,
           path: tagPath,
           name: route.name,
-          meta: { ...route.meta },
+          meta: { ...route.meta }
         })
       }
       if (route.children) {
@@ -148,7 +153,7 @@ export default class extends Vue {
     this.$nextTick(() => {
       for (const tag of tags) {
         if ((tag.to as ITagView).path === this.$route.path) {
-          ;(this.$refs.scrollPane as ScrollPane).moveToTarget(tag as any)
+          (this.$refs.scrollPane as ScrollPane).moveToTarget(tag as any)
           // When query is different then update
           if ((tag.to as ITagView).fullPath !== this.$route.fullPath) {
             TagsViewModule.updateVisitedView(this.$route)
@@ -165,7 +170,7 @@ export default class extends Vue {
     this.$nextTick(() => {
       this.$router
         .replace({
-          path: '/redirect' + fullPath,
+          path: '/redirect' + fullPath
         })
         .catch(err => {
           console.warn(err)

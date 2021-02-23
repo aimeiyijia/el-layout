@@ -24,7 +24,6 @@ class Settings extends VuexModule implements ISettingsState {
   public menuTextColor = defaultSettings.menuTextColor
   public menuActiveTextColor = defaultSettings.menuActiveTextColor
 
-
   @Mutation
   private CHANGE_SETTING(payload: { key: string, value: any }) {
     const { key, value } = payload

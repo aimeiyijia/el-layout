@@ -62,7 +62,6 @@ class App extends VuexModule implements IAppState {
     this.TOGGLE_DEVICE(device)
   }
 
-
   @Action
   public SetSize(size: string) {
     this.SET_SIZE(size)

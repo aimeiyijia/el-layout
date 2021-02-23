@@ -42,8 +42,8 @@ import Screenfull from '@/layout/components/Screenfull/index.vue'
     Breadcrumb,
     Hamburger,
     HeaderSearch,
-    Screenfull,
-  },
+    Screenfull
+  }
 })
 export default class extends Vue {
   get sidebar() {

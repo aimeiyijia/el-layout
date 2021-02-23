@@ -8,15 +8,16 @@ import { Component, Vue } from 'vue-property-decorator'
 import { constantRoutes } from '@/router/index.ts'
 
 @Component({
-  name: 'layouttest',
+  name: 'layouttest'
 })
 export default class extends Vue {
   get config() {
+    console.log(constantRoutes, '路由')
     return {
       routes: constantRoutes,
       stycfg: {
-        sideBarWidth: '210px',
-      },
+        sideBarWidth: '210px'
+      }
     }
   }
 }

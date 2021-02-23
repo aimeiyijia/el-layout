@@ -1,4 +1,4 @@
-declare var ElLayout: any
-declare var ElLayoutStore: any
+declare let ElLayout: any
+declare let ElLayoutStore: any
 
 export { ElLayout, ElLayoutStore }

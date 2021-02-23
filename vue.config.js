@@ -12,23 +12,23 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, 'src'),
-      },
-    },
+        '@': path.resolve(__dirname, 'src')
+      }
+    }
   },
   devServer: {
     port: devServerPort,
     open: true,
     overlay: {
       warnings: false,
-      errors: true,
+      errors: true
     },
-    progress: false,
+    progress: false
   },
   pluginOptions: {
     'style-resources-loader': {
       preProcessor: 'scss',
-      patterns: [path.resolve(__dirname, 'src/layout/styles/_mixins.scss')],
-    },
-  },
+      patterns: [path.resolve(__dirname, 'src/layout/styles/_mixins.scss')]
+    }
+  }
 }

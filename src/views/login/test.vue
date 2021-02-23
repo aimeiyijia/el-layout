@@ -1,8 +1,7 @@
 
 <template>
   <div class="login-container">
-    <el-button @click="handleGoAdmin">管理员端</el-button>
-    <el-button>债权人端</el-button>
+    <el-button @click="handleGoAdmin">隐藏菜单-测试页面</el-button>
   </div>
 </template>
 
@@ -10,7 +9,7 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 
 @Component({
-  name: 'Login'
+  name: 'Test'
 })
 export default class extends Vue {
   handleGoAdmin() {

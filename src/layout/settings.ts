@@ -17,7 +17,7 @@ export interface IStyCfg {
 const settings: ISettings = {
   showTagsView: true,
   fixedHeader: false,
-  showSidebarLogo: false,
+  showSidebarLogo: false
 }
 
 // 页面样式配置
@@ -28,7 +28,7 @@ const stycfg: IStyCfg = {
   subMenuActiveTextColor: '#f4f4f5',
   menuBgColor: '#304156',
   menuTextColor: '#bfcbd9',
-  menuActiveTextColor: '#409EFF',
+  menuActiveTextColor: '#409EFF'
 }
 
 const defaultSettings = Object.assign(settings, stycfg)

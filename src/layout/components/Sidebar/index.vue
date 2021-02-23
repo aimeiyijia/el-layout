@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'has-logo': showLogo }">
+  <div :class="{'has-logo': showLogo}">
     <sidebar-logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
@@ -36,8 +36,8 @@ import SidebarLogo from './SidebarLogo.vue'
   name: 'SideBar',
   components: {
     SidebarItem,
-    SidebarLogo,
-  },
+    SidebarLogo
+  }
 })
 export default class extends Vue {
   get sidebar() {
@@ -52,12 +52,15 @@ export default class extends Vue {
   get showLogo() {
     return SettingsModule.showSidebarLogo
   }
+
   get menuBgColor() {
     return SettingsModule.menuBgColor
   }
+
   get menuTextColor() {
     return SettingsModule.menuTextColor
   }
+
   get menuActiveTextColor() {
     return SettingsModule.menuActiveTextColor
   }

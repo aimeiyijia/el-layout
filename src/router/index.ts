@@ -1,15 +1,5 @@
-/*
- * @Author: your name
- * @Date: 2021-01-07 17:10:02
- * @LastEditTime: 2021-01-07 18:03:49
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \broke-refactor\packages\broke-service-main\src\router\index.ts
- */
-
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-
 
 Vue.use(VueRouter)
 

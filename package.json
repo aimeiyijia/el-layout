@@ -7,6 +7,7 @@
   "author": "broke",
   "scripts": {
     "serve": "vue-cli-service serve",
+    "lint": "vue-cli-service lint",
     "test:unit": "jest --clearCache && vue-cli-service test:unit",
     "build": "vue-cli-service build --target lib --name el-layout ./src/layout/index.js"
   },

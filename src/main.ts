@@ -18,7 +18,7 @@ Vue.use(ElLayout)
 Vue.use(SvgIcon, {
   tagName: 'svg-icon',
   defaultWidth: '1em',
-  defaultHeight: '1em',
+  defaultHeight: '1em'
 })
 
 Vue.config.productionTip = false
@@ -26,5 +26,5 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store: ElLayoutStore,
-  render: h => h(App),
+  render: h => h(App)
 }).$mount('#app')

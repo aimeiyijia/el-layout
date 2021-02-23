@@ -3,7 +3,7 @@
     v-if="!item.meta || !item.meta.hidden"
     :class="[
       isCollapse ? 'simple-mode' : 'full-mode',
-      { 'first-level': isFirstLevel },
+      {'first-level': isFirstLevel}
     ]"
   >
     <template
@@ -15,7 +15,7 @@
       >
         <el-menu-item
           :index="resolvePath(theOnlyOneChild.path)"
-          :class="{ 'submenu-title-noDropdown': isFirstLevel }"
+          :class="{'submenu-title-noDropdown': isFirstLevel}"
         >
           <svg-icon
             v-if="theOnlyOneChild.meta.icon"
@@ -61,8 +61,8 @@ import SidebarItemLink from './SidebarItemLink.vue'
   // See https://medium.com/haiiro-io/element-component-name-with-vue-class-component-f3b435656561 for detail
   name: 'SidebarItem',
   components: {
-    SidebarItemLink,
-  },
+    SidebarItemLink
+  }
 })
 export default class extends Vue {
   @Prop({ required: true }) private item!: RouteConfig

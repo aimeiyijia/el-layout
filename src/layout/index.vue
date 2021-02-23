@@ -6,8 +6,8 @@
       @click="handleClickOutside"
     />
     <sidebar class="sidebar-container" />
-    <div :class="{ hasTagsView: showTagsView }" class="main-container">
-      <div :class="{ 'fixed-header': fixedHeader }">
+    <div :class="{hasTagsView: showTagsView}" class="main-container">
+      <div :class="{'fixed-header': fixedHeader}">
         <navbar />
         <tags-view v-if="showTagsView" />
       </div>
@@ -19,14 +19,13 @@
 <script lang="ts">
 import '@/layout/styles/index.scss'
 import { ISettings, IStyCfg } from '@/layout/settings'
-import { Component, Prop, Watch} from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 import { mixins } from 'vue-class-component'
 import { RouteConfig } from 'vue-router'
 import { DeviceType, AppModule } from '@/layout/store/modules/app'
 import { SettingsModule } from '@/layout/store/modules/settings'
 import { AppMain, Navbar, Sidebar, TagsView } from './components'
 import ResizeMixin from './mixin/resize'
-import { watch } from 'fs'
 
 interface IConfig {
   routes: RouteConfig[]
@@ -40,8 +39,8 @@ interface IConfig {
     AppMain,
     Navbar,
     Sidebar,
-    TagsView,
-  },
+    TagsView
+  }
 })
 export default class extends mixins(ResizeMixin) {
   @Prop({ default: () => [] }) readonly config!: IConfig
@@ -51,7 +50,7 @@ export default class extends mixins(ResizeMixin) {
       hideSidebar: !this.sidebar.opened,
       openSidebar: this.sidebar.opened,
       withoutAnimation: this.sidebar.withoutAnimation,
-      mobile: this.device === DeviceType.Mobile,
+      mobile: this.device === DeviceType.Mobile
     }
   }
 
@@ -68,10 +67,10 @@ export default class extends mixins(ResizeMixin) {
     this.$store.dispatch('GenerateRoutes', this.config.routes)
 
     // 传入设置
-    for (let key in this.config.stycfg) {
+    for (const key in this.config.stycfg) {
       this.$store.dispatch('ChangeSetting', {
         key: key,
-        value: (this.config.stycfg as any)[key],
+        value: (this.config.stycfg as any)[key]
       })
     }
   }
