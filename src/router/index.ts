@@ -40,6 +40,7 @@ export const constantRoutes: RouteConfig[] = [
         component: () => import(/* webpackChunkName: "login" */ '@/views/login/index.vue'),
         name: 'PagePermission',
         meta: {
+          affix: true,
           activeMenu: '/permission/page',
           title: '测试子菜单1',
           roles: ['admin'] // or you can only set roles in sub nav

@@ -14,7 +14,7 @@
         tag="span"
         class="tags-view-item"
         @click.middle.native="!isAffix(tag) ? closeSelectedTag(tag) : ''"
-        @contextmenu.prevent.native="openMenu(tag, $event)"
+        @contextmenu.prevent.native="onContextmenu(tag, $event)"
       >
         {{ tag.meta.title }}
         <span
@@ -24,18 +24,6 @@
         />
       </router-link>
     </scroll-pane>
-    <ul
-      v-show="visible"
-      :style="{left: left + 'px', top: top + 'px'}"
-      class="contextmenu"
-    >
-      <li @click="refreshSelectedTag(selectedTag)">刷新</li>
-      <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">
-        关闭
-      </li>
-      <li @click="closeOthersTags">关闭其它</li>
-      <li @click="closeAllTags(selectedTag)">关闭全部</li>
-    </ul>
   </div>
 </template>
 
@@ -49,6 +37,8 @@ import { PermissionModule } from '@/layout/store/modules/permission'
 import { TagsViewModule, ITagView } from '@/layout/store/modules/tags-view'
 import { Scrollbar as ElScrollbar } from 'element-ui'
 import ScrollPane from './ScrollPane.vue'
+import Contextmenu from 'vue-contextmenujs'
+Vue.use(Contextmenu)
 
 @Component({
   name: 'TagsView',
@@ -111,6 +101,50 @@ export default class extends Vue {
 
   beforeDestroy() {
     window.removeEventListener('resize', _.debounce(this.scrollUpdate, 150))
+  }
+
+  // 右键菜单
+  onContextmenu(tag: ITagView, event: MouseEvent) {
+    const selectedTag = tag
+    this.selectedTag = tag
+    this.$contextmenu({
+      items: [
+        {
+          label: '刷新',
+          onClick: () => {
+            this.refreshSelectedTag(selectedTag)
+          }
+        },
+        {
+          label: '关闭',
+          disabled: this.isAffix(selectedTag),
+          onClick: () => {
+            this.closeSelectedTag(selectedTag)
+          }
+        },
+        {
+          label: '关闭其它',
+          icon: 'el-icon-refresh',
+          onClick: () => {
+            this.closeOthersTags()
+          }
+        },
+        {
+          label: '关闭全部',
+          icon: 'el-icon-refresh',
+          onClick: () => {
+            this.closeAllTags(selectedTag)
+          }
+        }
+      ],
+      event,
+      // x: event.clientX,
+      // y: event.clientY,
+      customClass: 'custom-class',
+      zIndex: 3,
+      minWidth: 120
+    })
+    return false
   }
 
   // 触发滚动条的更新事件
@@ -379,30 +413,6 @@ export default class extends Vue {
           position: relative;
           margin-right: 2px;
         }
-      }
-    }
-  }
-
-  .contextmenu {
-    margin: 0;
-    background: #fff;
-    z-index: 3000;
-    position: absolute;
-    list-style-type: none;
-    padding: 5px 0;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 400;
-    color: #333;
-    box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3);
-
-    li {
-      margin: 0;
-      padding: 7px 16px;
-      cursor: pointer;
-
-      &:hover {
-        background: #eee;
       }
     }
   }
