@@ -47,17 +47,6 @@ export const constantRoutes: RouteConfig[] = [
         }
       },
       ...arr,
-      {
-        path: 'caseDetail',
-        component: () => import(/* webpackChunkName: "login" */ '@/views/login/test.vue'),
-        name: 'DirectivePermission123',
-        meta: {
-          relateActive: '/permission/page',
-          hidden: true,
-          title: '测试子菜单3',
-          roles: ['admin']
-        }
-      }
     ]
   }
 ]

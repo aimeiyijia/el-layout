@@ -27,6 +27,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { AppModule } from '@/layout/store/modules/app'
+import { TagsViewModule } from '@/layout/store/modules/tags-view'
 import { PermissionModule } from '@/layout/store/modules/permission'
 import { SettingsModule } from '@/layout/store/modules/settings'
 import SidebarItem from './SidebarItem.vue'
@@ -65,15 +66,21 @@ export default class extends Vue {
     return SettingsModule.menuActiveTextColor
   }
 
+  get activeTag() {
+    return TagsViewModule.activeTag
+  }
+
   get activeMenu() {
     const route = this.$route
     const { meta, path } = route
-    if (meta.relateActive) {
-      return meta.relateActive
+    if (this.activeTag.norouter) {
+      console.log(this.activeTag.meta.activeMenu, '2')
+      return this.activeTag.meta.activeMenu
     }
     if (meta.activeMenu) {
       return meta.activeMenu
     }
+    console.log(path)
     return path
   }
 

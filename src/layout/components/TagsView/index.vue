@@ -126,7 +126,10 @@ export default class extends Vue {
         norouter: true,
         name: '1',
         component: Test,
-        meta: { title: 123 }
+        meta: {
+          title: 123,
+          activeMenu: '/permission/directive01'
+        }
       })
     }, 3000)
   }
