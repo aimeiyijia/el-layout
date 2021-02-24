@@ -157,6 +157,7 @@ export default class extends Vue {
         },
         {
           label: '关闭其它',
+          disabled: !this.isActive(selectedTag),
           onClick: () => {
             this.closeOthersTags()
           }
