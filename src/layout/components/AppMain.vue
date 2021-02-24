@@ -1,17 +1,14 @@
 <template>
   <section class="app-main">
-    <!-- <transition
+    <transition
       name="fade-transform"
       mode="out-in"
     >
-      <keep-alive :include="cachedViews">
+      <keep-alive :include="cachedViews" v-if="!activeTag.norouter">
         <router-view :key="key" />
       </keep-alive>
-    </transition> -->
-    <template v-for="item in test">
-      <Component :key="item.name" :is="item.component"></Component>
-    </template>
-
+      <Component v-else :is="activeTag.component"></Component>
+    </transition>
   </section>
 </template>
 
@@ -31,6 +28,10 @@ export default class extends Vue {
 
   get key() {
     return this.$route.path
+  }
+
+  get activeTag() {
+    return TagsViewModule.activeTag
   }
 }
 </script>
