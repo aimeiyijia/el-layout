@@ -5,24 +5,40 @@
       class="tags-view-wrapper"
       @scroll="handleScroll"
     >
-      <router-link
-        v-for="tag in visitedViews"
-        ref="tag"
-        :key="tag.path"
-        :class="isActive(tag) ? 'active' : ''"
-        :to="{path: tag.path, query: tag.query, fullPath: tag.fullPath}"
-        tag="span"
-        class="tags-view-item"
-        @click.middle.native="!isAffix(tag) ? closeSelectedTag(tag) : ''"
-        @contextmenu.prevent.native="onContextmenu(tag, $event)"
-      >
-        {{ tag.meta.title }}
+      <template v-for="tag in visitedViews">
+        <router-link
+          ref="tag"
+          v-if="!tag.norouter"
+          :key="tag.path"
+          :class="isActive(tag) ? 'active' : ''"
+          :to="{path: tag.path, query: tag.query, fullPath: tag.fullPath}"
+          tag="span"
+          class="tags-view-item"
+          @click.native="setActiveTag(tag)"
+          @contextmenu.prevent.native="onContextmenu(tag, $event)"
+        >
+          {{ tag.meta.title }}
+          <span
+            v-if="!isAffix(tag)"
+            class="el-icon-close"
+            @click.prevent.stop="closeSelectedTag(tag)"
+          />
+        </router-link>
         <span
-          v-if="!isAffix(tag)"
-          class="el-icon-close"
-          @click.prevent.stop="closeSelectedTag(tag)"
-        />
-      </router-link>
+          v-else
+          :key="tag.name"
+          :class="isActive(tag) ? 'active' : ''"
+          class="tags-view-item"
+          @click="setActiveTag(tag)"
+        >
+          {{ tag.meta.title }}
+          <span
+            v-if="!isAffix(tag)"
+            class="el-icon-close"
+            @click.prevent.stop="closeSelectedTag(tag)"
+          />
+        </span>
+      </template>
     </scroll-pane>
   </div>
 </template>
@@ -38,6 +54,7 @@ import { TagsViewModule, ITagView } from '@/layout/store/modules/tags-view'
 import { Scrollbar as ElScrollbar } from 'element-ui'
 import ScrollPane from './ScrollPane.vue'
 import Contextmenu from 'vue-contextmenujs'
+import Test from '@/views/login/test.vue'
 Vue.use(Contextmenu)
 
 @Component({
@@ -63,6 +80,10 @@ export default class extends Vue {
 
   get visitedViews() {
     return TagsViewModule.visitedViews
+  }
+
+  get activeTag() {
+    return TagsViewModule.activeTag
   }
 
   get routes() {
@@ -97,6 +118,16 @@ export default class extends Vue {
     this.initTags()
     this.addTags()
     window.addEventListener('resize', _.debounce(this.scrollUpdate, 150))
+
+    setTimeout(() => {
+      console.log('即将添加非路由tag')
+      TagsViewModule.addView({
+        norouter: true,
+        name: '1',
+        component: Test,
+        meta: { title: 123 }
+      })
+    }, 3000)
   }
 
   beforeDestroy() {
@@ -178,8 +209,16 @@ export default class extends Vue {
     }
   }
 
+  private setActiveTag(tag) {
+    TagsViewModule.addView(tag)
+  }
+
   private isActive(route: ITagView) {
-    return route.path === this.$route.path
+    console.log(route, 'tags')
+    if (route.norouter) {
+      return route.name === this.activeTag.name
+    }
+    return route.path === this.activeTag.path
   }
 
   private isAffix(tag: ITagView) {

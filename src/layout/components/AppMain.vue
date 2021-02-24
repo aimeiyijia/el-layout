@@ -1,24 +1,30 @@
 <template>
   <section class="app-main">
-    <transition
+    <!-- <transition
       name="fade-transform"
       mode="out-in"
     >
       <keep-alive :include="cachedViews">
         <router-view :key="key" />
       </keep-alive>
-    </transition>
+    </transition> -->
+    <template v-for="item in test">
+      <Component :key="item.name" :is="item.component"></Component>
+    </template>
+
   </section>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { TagsViewModule } from '@/layout/store/modules/tags-view'
+import Test from '@/views/login/test.vue'
 
 @Component({
   name: 'AppMain'
 })
 export default class extends Vue {
+  test = [{ name: 1, component: Test }]
   get cachedViews() {
     return TagsViewModule.cachedViews
   }

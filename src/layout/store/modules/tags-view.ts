@@ -1,6 +1,7 @@
 import { VuexModule, Module, Mutation, Action, getModule } from 'vuex-module-decorators'
 import { Route } from 'vue-router'
 import store from '@/layout/store'
+import _ from "lodash"
 
 export interface ITagView extends Partial<Route> {
   title?: string
@@ -9,12 +10,19 @@ export interface ITagView extends Partial<Route> {
 export interface ITagsViewState {
   visitedViews: ITagView[]
   cachedViews: (string | undefined)[]
+  activeTag: ITagView
 }
 
 @Module({ dynamic: true, store, name: 'tagsView' })
 class TagsView extends VuexModule implements ITagsViewState {
   public visitedViews: ITagView[] = []
   public cachedViews: (string | undefined)[] = []
+  public activeTag: ITagView = {}
+
+  @Mutation
+  private ADD_ACTIVE_TAGS(view: ITagView) {
+      this.activeTag = view
+  }
 
   @Mutation
   private ADD_VISITED_VIEW(view: ITagView) {
@@ -95,12 +103,14 @@ class TagsView extends VuexModule implements ITagsViewState {
 
   @Action
   public addView(view: ITagView) {
+    this.ADD_ACTIVE_TAGS(view)
     this.ADD_VISITED_VIEW(view)
     this.ADD_CACHED_VIEW(view)
   }
 
   @Action
   public addVisitedView(view: ITagView) {
+    this.ADD_ACTIVE_TAGS(view)
     this.ADD_VISITED_VIEW(view)
   }
 
@@ -134,6 +144,7 @@ class TagsView extends VuexModule implements ITagsViewState {
 
   @Action
   public updateVisitedView(view: ITagView) {
+    this.ADD_ACTIVE_TAGS(view)
     this.UPDATE_VISITED_VIEW(view)
   }
 }
