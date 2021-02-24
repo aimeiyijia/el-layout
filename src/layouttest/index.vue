@@ -8,6 +8,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import { constantRoutes } from '@/router/index.ts'
 
 import { PassengerStoreModule } from '@/store/modules/passenger'
+import { AppModule } from '@/layout/index'
 
 @Component({
   name: 'layouttest'
@@ -23,6 +24,7 @@ export default class extends Vue {
   }
 
   created() {
+    console.log(AppModule, '----')
     // console.log(PassengerStoreModule.loginInfo) // state
     // console.log(PassengerStoreModule.userNumber) // getter
     // PassengerStoreModule.getZhangsan() // actions

@@ -1,5 +1,8 @@
 import ElLayout from './index.vue'
 import ElLayoutStore from '@/layout/store'
+import {
+  AppModule
+} from './store/modules/app.ts'
 
 function install(Vue, options = {}) {
   if (install.installed) return
@@ -21,4 +24,4 @@ if (GlobalVue) {
 }
 
 // export default
-export { ElLayout, ElLayoutStore }
+export { ElLayout, ElLayoutStore, AppModule }

@@ -8,6 +8,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 import App from '@/App.vue'
 import router from '@/router'
+import store from '@/store'
 import '@/icons/components'
 
 import { ElLayout, ElLayoutStore } from '@/layout/index'
@@ -23,8 +24,11 @@ Vue.use(SvgIcon, {
 
 Vue.config.productionTip = false
 
+console.log(store, '123')
+console.log(ElLayoutStore, '456')
+
 new Vue({
   router,
-  store: ElLayoutStore,
+  store: Object.assign(store, ElLayoutStore),
   render: h => h(App)
 }).$mount('#app')
