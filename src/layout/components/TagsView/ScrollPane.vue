@@ -145,7 +145,7 @@ export default class extends Vue {
   font-size: 24px;
   padding-top: 6px;
   vertical-align: middle;
-  background-color: #42b983;
+  // background-color: #42b983;
   cursor: pointer;
   &:hover {
     // color: var(--tagActiveColor, #42b983);

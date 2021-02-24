@@ -6,7 +6,10 @@
       @click="handleClickOutside"
     />
     <sidebar class="sidebar-container" />
-    <div :class="{hasTagsView: showTagsView, sidebarOpen: sidebar.opened}" class="main-container">
+    <div
+      :class="{hasTagsView: showTagsView, sidebarOpen: sidebar.opened}"
+      class="main-container"
+    >
       <div :class="{'fixed-header': fixedHeader}">
         <navbar />
         <tags-view v-if="showTagsView" />
@@ -63,11 +66,19 @@ export default class extends mixins(ResizeMixin) {
     return SettingsModule.fixedHeader
   }
 
+  get sidebar() {
+    return AppModule.sidebar
+  }
+
   beforeMount() {
     // 设置菜单
     this.$store.dispatch('GenerateRoutes', this.config.routes)
 
-    const setting = Object.assign(defaultSettings, this.config.stycfg, this.config.settings)
+    const setting = Object.assign(
+      defaultSettings,
+      this.config.stycfg,
+      this.config.settings
+    )
     // 传入设置
     for (const key in setting) {
       this.$store.dispatch('ChangeSetting', {
@@ -114,7 +125,6 @@ export default class extends mixins(ResizeMixin) {
 
 .main-container {
   min-height: 100%;
-  transition: margin-left 0.28s;
   margin-left: var(--sideBarWidth, 210px);
   width: calc(100% - 54px);
   position: relative;
