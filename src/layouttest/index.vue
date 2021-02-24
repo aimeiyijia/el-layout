@@ -7,6 +7,8 @@ import { Component, Vue } from 'vue-property-decorator'
 // import layout from '@/layout/index.vue'
 import { constantRoutes } from '@/router/index.ts'
 
+import { PassengerStoreModule } from '@/store/modules/passenger'
+
 @Component({
   name: 'layouttest'
 })
@@ -18,6 +20,13 @@ export default class extends Vue {
         sideBarWidth: '210px'
       }
     }
+  }
+
+  created() {
+    // console.log(PassengerStoreModule.loginInfo) // state
+    // console.log(PassengerStoreModule.userNumber) // getter
+    // PassengerStoreModule.getZhangsan() // actions
+    // PassengerStoreModule.getLisi() // actions
   }
 }
 </script>
