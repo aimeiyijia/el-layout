@@ -6,7 +6,8 @@
       class="hamburger-container"
       @toggle-click="toggleSideBar"
     />
-    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
+    <breadcrumb v-if="showBreadcrumb" id="breadcrumb-container" class="breadcrumb-container" />
+    <tags-view v-if="showTagsView && !showBreadcrumb" />
     <div class="right-menu">
       <template v-if="device !== 'mobile'">
         <header-search class="right-menu-item" />
@@ -31,6 +32,8 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { AppModule } from '@/layout/store/modules/app'
+import { SettingsModule } from '@/layout/store/modules/settings'
+import TagsView from '@/layout/components/TagsView/index.vue'
 import Breadcrumb from '@/layout/components/Breadcrumb/index.vue'
 import Hamburger from '@/layout/components/Hamburger/index.vue'
 import HeaderSearch from '@/layout/components/HeaderSearch/index.vue'
@@ -39,6 +42,7 @@ import Screenfull from '@/layout/components/Screenfull/index.vue'
 @Component({
   name: 'Navbar',
   components: {
+    TagsView,
     Breadcrumb,
     Hamburger,
     HeaderSearch,
@@ -48,6 +52,14 @@ import Screenfull from '@/layout/components/Screenfull/index.vue'
 export default class extends Vue {
   get sidebar() {
     return AppModule.sidebar
+  }
+
+  get showBreadcrumb() {
+    return SettingsModule.showBreadcrumb
+  }
+
+  get showTagsView() {
+    return SettingsModule.showTagsView
   }
 
   get device() {
@@ -81,6 +93,15 @@ export default class extends Vue {
     &:hover {
       background: rgba(0, 0, 0, 0.025);
     }
+  }
+
+  .tags-view-container {
+    display: inline-block;
+    width: calc(100% - 208px);
+    border-bottom: none;
+    box-shadow: none;
+    position: relative;
+    margin-top: 9px;
   }
 
   .breadcrumb-container {

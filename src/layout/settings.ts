@@ -2,6 +2,7 @@ export interface ISettings {
   showTagsView: boolean
   showSidebarLogo: boolean
   fixedHeader: boolean
+  showBreadcrumb: boolean
 }
 export interface IStyCfg {
   sideBarWidth: string
@@ -18,7 +19,8 @@ export interface IStyCfg {
 const settings: ISettings = {
   showTagsView: true,
   fixedHeader: false,
-  showSidebarLogo: false
+  showSidebarLogo: false,
+  showBreadcrumb: false
 }
 
 // 页面样式配置

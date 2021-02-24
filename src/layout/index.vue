@@ -12,7 +12,7 @@
     >
       <div :class="{'fixed-header': fixedHeader}">
         <navbar />
-        <tags-view v-if="showTagsView" />
+        <tags-view v-if="showTagsView && showBreadcrumb" />
       </div>
       <app-main />
     </div>
@@ -58,6 +58,10 @@ export default class extends mixins(ResizeMixin) {
     }
   }
 
+  get showBreadcrumb() {
+    return SettingsModule.showBreadcrumb
+  }
+
   get showTagsView() {
     return SettingsModule.showTagsView
   }
@@ -86,13 +90,6 @@ export default class extends mixins(ResizeMixin) {
         value: (setting as any)[key]
       })
     }
-    // // 传入设置
-    // for (const key in this.config.stycfg) {
-    //   this.$store.dispatch('ChangeSetting', {
-    //     key: key,
-    //     value: (this.config.stycfg as any)[key]
-    //   })
-    // }
   }
 
   private handleClickOutside() {

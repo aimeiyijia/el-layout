@@ -335,7 +335,7 @@ export default class extends Vue {
 </style>
 <style lang="scss" scoped>
 .tags-view-container {
-  height: 34px;
+  height: 33px;
   width: 100%;
   background: #fff;
   border-bottom: 1px solid #d8dce5;

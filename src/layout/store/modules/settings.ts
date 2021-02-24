@@ -6,6 +6,7 @@ export interface ISettingsState {
   fixedHeader: boolean
   showTagsView: boolean
   showSidebarLogo: boolean
+  showBreadcrumb: boolean
 }
 
 @Module({ dynamic: true, store, name: 'settings' })
@@ -14,6 +15,7 @@ class Settings extends VuexModule implements ISettingsState {
   public fixedHeader = defaultSettings.fixedHeader
   public showTagsView = defaultSettings.showTagsView
   public showSidebarLogo = defaultSettings.showSidebarLogo
+  public showBreadcrumb = defaultSettings.showBreadcrumb
 
   // 页面样式配置
   public sideBarWidth = defaultSettings.sideBarWidth

@@ -134,7 +134,7 @@ export default class extends Vue {
   white-space: nowrap;
   position: relative;
   overflow: hidden;
-  width: calc(100% - 0px);
+  width: 100%;
   vertical-align: middle;
   &.tag-show {
     width: calc(100% - 60px);
