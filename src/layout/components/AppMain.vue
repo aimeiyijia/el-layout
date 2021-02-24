@@ -4,10 +4,10 @@
       name="fade-transform"
       mode="out-in"
     >
-      <keep-alive :include="cachedViews" v-if="!activeTag.norouter">
+      <keep-alive :include="cachedViews" v-if="!activeTag.norouter && isRouterAlive">
         <router-view :key="key" />
       </keep-alive>
-      <Component v-else :is="activeTag.component"></Component>
+      <Component v-else-if="activeTag.norouter && isRouterAlive" :is="activeTag.component"></Component>
     </transition>
   </section>
 </template>
@@ -15,13 +15,12 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { TagsViewModule } from '@/layout/store/modules/tags-view'
-import Test from '@/views/login/test.vue'
 
 @Component({
   name: 'AppMain'
 })
 export default class extends Vue {
-  test = [{ name: 1, component: Test }]
+  isRouterAlive= true
   get cachedViews() {
     return TagsViewModule.cachedViews
   }
@@ -32,6 +31,12 @@ export default class extends Vue {
 
   get activeTag() {
     return TagsViewModule.activeTag
+  }
+
+  reload() {
+    console.log(this.$route)
+    this.isRouterAlive = false
+    this.$nextTick(() => (this.isRouterAlive = true))
   }
 }
 </script>

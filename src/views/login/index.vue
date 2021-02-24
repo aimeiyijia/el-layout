@@ -1,8 +1,7 @@
 
 <template>
   <div class="login-container">
-    <el-button @click="handleGoAdmin">管理员端</el-button>
-    <el-button>债权人端</el-button>
+    {{ $route.name }} {{ new Date().getTime() }}
   </div>
 </template>
 

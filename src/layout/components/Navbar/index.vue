@@ -7,7 +7,7 @@
       @toggle-click="toggleSideBar"
     />
     <breadcrumb v-if="showBreadcrumb" id="breadcrumb-container" class="breadcrumb-container" />
-    <tags-view v-if="showTagsView && !showBreadcrumb" />
+    <tags-view v-if="showTagsView && !showBreadcrumb" @refresh="$emit('refresh')" />
     <div class="right-menu">
       <template v-if="device !== 'mobile'">
         <header-search class="right-menu-item" />

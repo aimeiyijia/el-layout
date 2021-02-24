@@ -11,10 +11,10 @@
       class="main-container"
     >
       <div :class="{'fixed-header': fixedHeader}">
-        <navbar />
-        <tags-view v-if="showTagsView && showBreadcrumb" />
+        <navbar @refresh="refresh" />
+        <tags-view v-if="showTagsView && showBreadcrumb" @refresh="refresh" />
       </div>
-      <app-main />
+      <app-main ref="appMain" />
     </div>
   </div>
 </template>
@@ -74,6 +74,10 @@ export default class extends mixins(ResizeMixin) {
     return AppModule.sidebar
   }
 
+  get appMain() {
+    return this.$refs.appMain as Vue
+  }
+
   beforeMount() {
     // 设置菜单
     this.$store.dispatch('GenerateRoutes', this.config.routes)
@@ -94,6 +98,10 @@ export default class extends mixins(ResizeMixin) {
 
   private handleClickOutside() {
     AppModule.CloseSideBar(false)
+  }
+
+  private refresh() {
+    console.log(this.appMain.reload())
   }
 }
 </script>

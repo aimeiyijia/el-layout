@@ -30,6 +30,7 @@
           :class="isActive(tag) ? 'active' : ''"
           class="tags-view-item"
           @click="setActiveTag(tag)"
+          @contextmenu.prevent="onContextmenu(tag, $event)"
         >
           {{ tag.meta.title }}
           <span
@@ -142,6 +143,7 @@ export default class extends Vue {
       items: [
         {
           label: '刷新',
+          disabled: !this.isActive(selectedTag),
           onClick: () => {
             this.refreshSelectedTag(selectedTag)
           }
@@ -214,7 +216,6 @@ export default class extends Vue {
   }
 
   private isActive(route: ITagView) {
-    console.log(route, 'tags')
     if (route.norouter) {
       return route.name === this.activeTag.name
     }
@@ -286,15 +287,16 @@ export default class extends Vue {
     TagsViewModule.delCachedView(view)
     const { fullPath } = view
     this.scrollUpdate()
-    this.$nextTick(() => {
-      this.$router
-        .replace({
-          path: fullPath
-        })
-        .catch(err => {
-          console.warn(err)
-        })
-    })
+    this.$emit('refresh')
+    // this.$nextTick(() => {
+    //   this.$router
+    //     .replace({
+    //       path: fullPath
+    //     })
+    //     .catch(err => {
+    //       console.warn(err)
+    //     })
+    // })
   }
 
   private closeSelectedTag(view: ITagView) {
