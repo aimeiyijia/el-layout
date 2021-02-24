@@ -124,14 +124,12 @@ export default class extends Vue {
         },
         {
           label: '关闭其它',
-          icon: 'el-icon-refresh',
           onClick: () => {
             this.closeOthersTags()
           }
         },
         {
           label: '关闭全部',
-          icon: 'el-icon-refresh',
           onClick: () => {
             this.closeAllTags(selectedTag)
           }
@@ -140,9 +138,9 @@ export default class extends Vue {
       event,
       // x: event.clientX,
       // y: event.clientY,
-      customClass: 'custom-class',
+      customClass: 'custom-class noContextmenuIcon',
       zIndex: 3,
-      minWidth: 120
+      minWidth: 82
     })
     return false
   }
@@ -341,6 +339,9 @@ export default class extends Vue {
 </script>
 
 <style lang="scss">
+.noContextmenuIcon .menu_item .menu_item_expand_icon {
+  display: none;
+}
 // Reset element css of el-icon-close
 .tags-view-wrapper {
   .tags-view-item {
