@@ -24,9 +24,6 @@ Vue.use(SvgIcon, {
 
 Vue.config.productionTip = false
 
-console.log(store, '123')
-console.log(ElLayoutStore, '456')
-
 new Vue({
   router,
   store: Object.assign(store, ElLayoutStore),

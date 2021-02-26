@@ -1,8 +1,13 @@
 import ElLayout from './index.vue'
 import ElLayoutStore from '@/layout/store'
-import {
-  AppModule
-} from './store/modules/app.ts'
+// AppModule,
+// PermissionModule,
+// SettingsModule,
+// TagsViewModule,
+import { AppModule } from './store/modules/app.ts'
+import { PermissionModule } from './store/modules/permission.ts'
+import { SettingsModule } from './store/modules/settings.ts'
+import { TagsViewModule } from './store/modules/tags-view.ts'
 
 function install(Vue, options = {}) {
   if (install.installed) return
@@ -24,4 +29,11 @@ if (GlobalVue) {
 }
 
 // export default
-export { ElLayout, ElLayoutStore, AppModule }
+export {
+  ElLayout,
+  ElLayoutStore,
+  AppModule,
+  PermissionModule,
+  SettingsModule,
+  TagsViewModule
+}

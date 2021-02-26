@@ -25,7 +25,8 @@ export default class extends Vue {
 
   created() {
     console.log(AppModule, '----')
-    // console.log(PassengerStoreModule.loginInfo) // state
+    console.log(this)
+    console.log(PassengerStoreModule.loginInfo) // state
     // console.log(PassengerStoreModule.userNumber) // getter
     // PassengerStoreModule.getZhangsan() // actions
     // PassengerStoreModule.getLisi() // actions

@@ -1,18 +1,31 @@
 <template>
-  <div class="navbar">
+  <div class="navbar" ref="navbar">
     <hamburger
+      ref="hamburgerContainer"
       id="hamburger-container"
       :is-active="sidebar.opened"
       class="hamburger-container"
       @toggle-click="toggleSideBar"
     />
-    <breadcrumb v-if="showBreadcrumb" id="breadcrumb-container" class="breadcrumb-container" />
-    <tags-view v-if="showTagsView && !showBreadcrumb" @refresh="$emit('refresh')" />
-    <div class="right-menu">
+    <breadcrumb
+      ref="breadcrumb"
+      v-if="showBreadcrumb"
+      id="breadcrumb-container"
+      class="breadcrumb-container"
+    />
+    <tags-view
+      ref="tagsView"
+      v-if="showTagsView && !showBreadcrumb"
+      @refresh="$emit('refresh')"
+    />
+    <div class="right-menu" ref="rightMenu">
       <template v-if="device !== 'mobile'">
         <header-search class="right-menu-item" />
         <screenfull class="right-menu-item hover-effect" />
       </template>
+      <span class="right-menu-item">
+        <slot name="custominfo"></slot>
+      </span>
       <el-dropdown
         class="avatar-container right-menu-item hover-effect"
         trigger="click"
@@ -50,6 +63,26 @@ import Screenfull from '@/layout/components/Screenfull/index.vue'
   }
 })
 export default class extends Vue {
+  get navbar() {
+    return this.$refs.navbar as Vue
+  }
+
+  get hamburgerContainer() {
+    return this.$refs.hamburgerContainer as Vue
+  }
+
+  get breadcrumb() {
+    return this.$refs.breadcrumb as Vue
+  }
+
+  get tagsView() {
+    return this.$refs.tagsView as Vue
+  }
+
+  get rightMenu() {
+    return this.$refs.rightMenu as Vue
+  }
+
   get sidebar() {
     return AppModule.sidebar
   }
@@ -66,9 +99,63 @@ export default class extends Vue {
     return AppModule.device.toString()
   }
 
+  mounted() {
+    this.computeTagsViewWidth()
+    // window.addEventListener(
+    //   'resize',
+    //   this.computeTagsViewWidth
+    // )
+
+    // 选择需要观察变动的节点
+    const targetNode = this.rightMenu
+
+    // 观察器的配置（需要观察什么变动）
+    const config = { subtree: true, characterData: true }
+
+    // 当观察到变动时执行的回调函数
+    const callback = (mutationsList, observer) => {
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'characterData') {
+          this.computeTagsViewWidth()
+        }
+      }
+    }
+
+    // 创建一个观察器实例并传入回调函数
+    const observer = new MutationObserver(callback)
+
+    // 以上述配置开始观察目标节点
+    observer.observe(targetNode, config)
+  }
+
+  beforeDestroy() {
+    // window.removeEventListener('resize', this.computeTagsViewWidth)
+  }
+
+  private computeTagsViewWidth() {
+    console.log(1)
+    const tagsView = this.tagsView
+    const navbarWidth = this.navbar && this.getElWidth(this.navbar)
+    const hamburgerContainerWidth =
+      this.hamburgerContainer && this.getElWidth(this.hamburgerContainer.$el)
+    const breadcrumbWidth =
+      (this.breadcrumb && this.getElWidth(this.breadcrumb.$el)) || 0
+    const rightMenuWidth = this.rightMenu && this.getElWidth(this.rightMenu)
+    const width =
+      navbarWidth -
+      hamburgerContainerWidth -
+      breadcrumbWidth -
+      rightMenuWidth +
+      'px'
+    tagsView.$el.style.width = width
+  }
+
+  private getElWidth(el: HTMLElement) {
+    return el && el.getBoundingClientRect().width
+  }
+
   private toggleSideBar() {
     AppModule.ToggleSideBar(false)
-    console.log(this.sidebar)
   }
 }
 </script>

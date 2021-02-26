@@ -11,7 +11,13 @@
       class="main-container"
     >
       <div :class="{'fixed-header': fixedHeader}">
-        <navbar @refresh="refresh" />
+        <navbar @refresh="refresh" >
+          <template #custominfo>
+            <div>
+              {{ test }}
+            </div>
+          </template>
+        </navbar>
         <tags-view v-if="showTagsView && showBreadcrumb" @refresh="refresh" />
       </div>
       <app-main ref="appMain" />
@@ -48,6 +54,8 @@ interface IConfig {
 })
 export default class extends mixins(ResizeMixin) {
   @Prop({ default: () => [] }) readonly config!: IConfig
+
+  test = 0
 
   get classObj() {
     return {
@@ -94,6 +102,12 @@ export default class extends mixins(ResizeMixin) {
         value: (setting as any)[key]
       })
     }
+  }
+
+  mounted() {
+    // setInterval(() => {
+    //   this.test += 100
+    // }, 10)
   }
 
   private handleClickOutside() {
