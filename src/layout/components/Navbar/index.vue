@@ -63,6 +63,7 @@ import Screenfull from '@/layout/components/Screenfull/index.vue'
   }
 })
 export default class extends Vue {
+  observer: any = null
   get navbar() {
     return this.$refs.navbar as Vue
   }
@@ -80,7 +81,7 @@ export default class extends Vue {
   }
 
   get rightMenu() {
-    return this.$refs.rightMenu as Vue
+    return this.$refs.rightMenu as HTMLElement
   }
 
   get sidebar() {
@@ -101,10 +102,10 @@ export default class extends Vue {
 
   mounted() {
     this.computeTagsViewWidth()
-    // window.addEventListener(
-    //   'resize',
-    //   this.computeTagsViewWidth
-    // )
+    window.addEventListener(
+      'resize',
+      this.computeTagsViewWidth
+    )
 
     // 选择需要观察变动的节点
     const targetNode = this.rightMenu
@@ -126,14 +127,16 @@ export default class extends Vue {
 
     // 以上述配置开始观察目标节点
     observer.observe(targetNode, config)
+    this.observer = observer
   }
 
   beforeDestroy() {
-    // window.removeEventListener('resize', this.computeTagsViewWidth)
+    // 之后，可停止观察
+    this.observer.disconnect()
+    window.removeEventListener('resize', this.computeTagsViewWidth)
   }
 
   private computeTagsViewWidth() {
-    console.log(1)
     const tagsView = this.tagsView
     const navbarWidth = this.navbar && this.getElWidth(this.navbar)
     const hamburgerContainerWidth =

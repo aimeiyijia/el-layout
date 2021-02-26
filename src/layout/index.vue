@@ -106,8 +106,8 @@ export default class extends mixins(ResizeMixin) {
 
   mounted() {
     // setInterval(() => {
-    //   this.test += 100
-    // }, 10)
+    //   this.test += 1000
+    // }, 100)
   }
 
   private handleClickOutside() {
