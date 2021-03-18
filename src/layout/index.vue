@@ -29,7 +29,7 @@
 import '@/layout/styles/index.scss'
 import defaultSettings, { ISettings, IStyCfg } from '@/layout/settings'
 
-import { Component, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop } from 'vue-property-decorator'
 import { mixins } from 'vue-class-component'
 import { RouteConfig } from 'vue-router'
 import { DeviceType, AppModule } from '@/layout/store/modules/app'
