@@ -11,16 +11,20 @@ import router from '@/router'
 import store from '@/store'
 import '@/icons/components'
 
-import { ElLayout, ElLayoutStore } from '@/layout/index'
+// import { ElLayout, ElLayoutStore } from '../dist/el-layout.common.js'
+// import '../dist/el-layout.css'
+import { ElLayout, ElLayoutStore } from './layout/index.js'
 import '@/layout/styles/index.scss'
 
 Vue.use(ElementUI)
-Vue.use(ElLayout)
+
 Vue.use(SvgIcon, {
   tagName: 'svg-icon',
   defaultWidth: '1em',
   defaultHeight: '1em'
 })
+
+Vue.use(ElLayout)
 
 Vue.config.productionTip = false
 

@@ -34,6 +34,7 @@ import { mixins } from 'vue-class-component'
 import { RouteConfig } from 'vue-router'
 import { DeviceType, AppModule } from '@/layout/store/modules/app'
 import { SettingsModule } from '@/layout/store/modules/settings'
+import { PermissionModule } from '@/layout/store/modules/permission'
 import { AppMain, Navbar, Sidebar, TagsView } from './components'
 import ResizeMixin from './mixin/resize'
 
@@ -88,7 +89,7 @@ export default class extends mixins(ResizeMixin) {
 
   beforeMount() {
     // 设置菜单
-    this.$store.dispatch('GenerateRoutes', this.config.routes)
+    PermissionModule.GenerateRoutes(this.config.routes)
 
     const setting = Object.assign(
       defaultSettings,
@@ -97,7 +98,7 @@ export default class extends mixins(ResizeMixin) {
     )
     // 传入设置
     for (const key in setting) {
-      this.$store.dispatch('ChangeSetting', {
+      SettingsModule.ChangeSetting({
         key: key,
         value: (setting as any)[key]
       })

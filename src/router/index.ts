@@ -15,7 +15,6 @@ for (let i = 0; i < 20; i++){
     }
   },)
 }
-console.log(arr)
 
 
 export const constantRoutes: RouteConfig[] = [
@@ -26,7 +25,7 @@ export const constantRoutes: RouteConfig[] = [
   },
   {
     path: '/permission',
-    component: () => import('@/layouttest/index.vue'),
+    component: () => import(/* webpackChunkName: "login" */ '@/layouttest/index.vue'),
     redirect: '/permission/page',
     meta: {
       title: '测试父菜单',

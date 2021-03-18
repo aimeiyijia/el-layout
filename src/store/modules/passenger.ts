@@ -2,12 +2,13 @@ import {Module,VuexModule,Mutation,Action,getModule,} from 'vuex-module-decorato
 import store from '@/store';
 
 type User = { username: string; password: string; }
+export interface IPassenger {}
 
 // dynamic: true: 动态创建动态模块,即new Vuex.Store({})里面不用注册的.空着就行,
 // store,当前模块注册到store上.也可以写在getModule上,即getModule(PassengerStore,store)
 // namespaced: true, name: 'passenger' 命名空间
 @Module({
-  name: 'passenger', dynamic: true, namespaced: true, store,
+  name: 'passenger', dynamic: true, namespaced: true, store, preserveState:  sessionStorage.getItem('vuex') !== null
 })
 export default class PassengerStore extends VuexModule {
   // state => 要public不然外面调用不到
