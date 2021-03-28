@@ -14,10 +14,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { Observer } from 'mobx-vue'
 import { TagsViewModule } from '@/layout/store/modules/tags-view'
 
-@Observer
 @Component({
   name: 'AppMain'
 })

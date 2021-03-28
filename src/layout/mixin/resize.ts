@@ -1,10 +1,8 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
-import { Observer } from 'mobx-vue'
 import { AppModule, DeviceType } from '@/layout/store/modules/app'
 
 const WIDTH = 992 // refer to Bootstrap's responsive design
 
-@Observer
 @Component({
   name: 'ResizeMixin'
 })

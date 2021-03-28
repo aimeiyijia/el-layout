@@ -44,7 +44,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { Observer } from 'mobx-vue'
 import { AppModule } from '@/layout/store/modules/app'
 import { SettingsModule } from '@/layout/store/modules/settings'
 import TagsView from '@/layout/components/TagsView/index.vue'
@@ -53,7 +52,6 @@ import Hamburger from '@/layout/components/Hamburger/index.vue'
 import HeaderSearch from '@/layout/components/HeaderSearch/index.vue'
 import Screenfull from '@/layout/components/Screenfull/index.vue'
 
-@Observer
 @Component({
   name: 'Navbar',
   components: {
