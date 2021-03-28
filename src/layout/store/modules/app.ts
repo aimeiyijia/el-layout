@@ -1,5 +1,4 @@
-import { VuexModule, Module, Mutation, Action, getModule } from 'vuex-module-decorators'
-import store from '@/layout/store'
+import { observable, computed, action } from 'mobx'
 
 export enum DeviceType {
   Mobile,
@@ -14,58 +13,40 @@ export interface IAppState {
   }
   size: string
 }
-
-@Module({ dynamic: true, store, name: 'app' })
-class App extends VuexModule implements IAppState {
+class App {
+  @observable
   public sidebar = {
     opened: true,
     withoutAnimation: false
   }
 
+  @observable
   public device = DeviceType.Desktop
+
+  @observable
   public size = 'medium'
 
-  @Mutation
-  private TOGGLE_SIDEBAR(withoutAnimation: boolean) {
+  @action.bound
+  private ToggleSideBar(withoutAnimation: boolean) {
     this.sidebar.opened = !this.sidebar.opened
     this.sidebar.withoutAnimation = withoutAnimation
   }
 
-  @Mutation
-  private CLOSE_SIDEBAR(withoutAnimation: boolean) {
+  @action.bound
+  private CloseSideBar(withoutAnimation: boolean) {
     this.sidebar.opened = false
     this.sidebar.withoutAnimation = withoutAnimation
   }
 
-  @Mutation
-  private TOGGLE_DEVICE(device: DeviceType) {
+  @action.bound
+  private ToggleDevice(device: DeviceType) {
     this.device = device
   }
 
-  @Mutation
-  private SET_SIZE(size: string) {
+  @action.bound
+  private SetSize(size: string) {
     this.size = size
   }
-
-  @Action
-  public ToggleSideBar(withoutAnimation: boolean) {
-    this.TOGGLE_SIDEBAR(withoutAnimation)
-  }
-
-  @Action
-  public CloseSideBar(withoutAnimation: boolean) {
-    this.CLOSE_SIDEBAR(withoutAnimation)
-  }
-
-  @Action
-  public ToggleDevice(device: DeviceType) {
-    this.TOGGLE_DEVICE(device)
-  }
-
-  @Action
-  public SetSize(size: string) {
-    this.SET_SIZE(size)
-  }
 }
-
-export const AppModule = getModule(App)
+const AppModule = new App()
+export { AppModule }

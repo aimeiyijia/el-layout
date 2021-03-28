@@ -26,6 +26,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import { Observer } from 'mobx-vue'
+import { toJS } from 'mobx'
 import { AppModule } from '@/layout/store/modules/app'
 import { TagsViewModule } from '@/layout/store/modules/tags-view'
 import { PermissionModule } from '@/layout/store/modules/permission'
@@ -33,6 +35,7 @@ import { SettingsModule } from '@/layout/store/modules/settings'
 import SidebarItem from './SidebarItem.vue'
 import SidebarLogo from './SidebarLogo.vue'
 
+@Observer
 @Component({
   name: 'SideBar',
   components: {
@@ -42,11 +45,10 @@ import SidebarLogo from './SidebarLogo.vue'
 })
 export default class extends Vue {
   get sidebar() {
-    return AppModule.sidebar
+    return toJS(AppModule.sidebar)
   }
 
   get routes() {
-    console.log(PermissionModule.routes, 11)
     return PermissionModule.routes
   }
 
@@ -80,11 +82,11 @@ export default class extends Vue {
     if (meta.activeMenu) {
       return meta.activeMenu
     }
-    console.log(path)
     return path
   }
 
   get isCollapse() {
+    console.log(this.sidebar.opened, '开启')
     return !this.sidebar.opened
   }
 }

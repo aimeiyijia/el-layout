@@ -49,6 +49,7 @@ import path from 'path'
 import _ from 'lodash'
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { RouteConfig } from 'vue-router'
+import { Observer } from 'mobx-vue'
 import { AppModule } from '@/layout/store/modules/app'
 import { PermissionModule } from '@/layout/store/modules/permission'
 import { TagsViewModule, ITagView } from '@/layout/store/modules/tags-view'
@@ -58,6 +59,7 @@ import Contextmenu from 'vue-contextmenujs'
 import Test from '@/views/login/test.vue'
 Vue.use(Contextmenu)
 
+@Observer
 @Component({
   name: 'TagsView',
   components: {

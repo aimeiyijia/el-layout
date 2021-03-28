@@ -27,6 +27,7 @@
 
 <script lang="ts">
 import '@/layout/styles/index.scss'
+import { Observer } from 'mobx-vue'
 import defaultSettings, { ISettings, IStyCfg } from '@/layout/settings'
 
 import { Component, Vue, Prop } from 'vue-property-decorator'
@@ -43,7 +44,7 @@ interface IConfig {
   settings?: ISettings
   stycfg?: IStyCfg
 }
-
+@Observer
 @Component({
   name: 'Layout',
   components: {
