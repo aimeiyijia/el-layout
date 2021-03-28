@@ -49,7 +49,7 @@ import path from 'path'
 import _ from 'lodash'
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { RouteConfig } from 'vue-router'
-import { AppModule } from '@/layout/store/modules/app'
+import { AppModule, IAppState } from '@/layout/store/modules/app'
 import { PermissionModule } from '@/layout/store/modules/permission'
 import { TagsViewModule, ITagView } from '@/layout/store/modules/tags-view'
 import { Scrollbar as ElScrollbar } from 'element-ui'
@@ -65,6 +65,7 @@ Vue.use(Contextmenu)
   }
 })
 export default class extends Vue {
+  private AppModule: IAppState = AppModule
   private visible = false
   private top = 0
   private left = 0
@@ -92,7 +93,7 @@ export default class extends Vue {
   }
 
   get sidebar() {
-    return AppModule.sidebar
+    return this.AppModule.sidebar
   }
 
   @Watch('$route', { deep: true })

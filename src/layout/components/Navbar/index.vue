@@ -44,7 +44,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { AppModule } from '@/layout/store/modules/app'
+import { AppModule, IAppState } from '@/layout/store/modules/app'
 import { SettingsModule } from '@/layout/store/modules/settings'
 import TagsView from '@/layout/components/TagsView/index.vue'
 import Breadcrumb from '@/layout/components/Breadcrumb/index.vue'
@@ -63,7 +63,8 @@ import Screenfull from '@/layout/components/Screenfull/index.vue'
   }
 })
 export default class extends Vue {
-  observer: any = null
+  private AppModule: IAppState = AppModule
+  private observer: any = null
   get navbar() {
     return this.$refs.navbar as Vue
   }
@@ -85,7 +86,7 @@ export default class extends Vue {
   }
 
   get sidebar() {
-    return AppModule.sidebar
+    return this.AppModule.sidebar
   }
 
   get showBreadcrumb() {
@@ -97,7 +98,7 @@ export default class extends Vue {
   }
 
   get device() {
-    return AppModule.device.toString()
+    return this.AppModule.device.toString()
   }
 
   mounted() {

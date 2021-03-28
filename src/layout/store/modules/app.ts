@@ -1,4 +1,4 @@
-import { observable, computed, action } from 'mobx'
+import { observable, action } from 'mobx'
 
 export enum DeviceType {
   Mobile,
@@ -12,8 +12,12 @@ export interface IAppState {
     withoutAnimation: boolean
   }
   size: string
+  ToggleSideBar(withoutAnimation: boolean): any
+  CloseSideBar(withoutAnimation: boolean): any
+  ToggleDevice(device: DeviceType): any
+  SetSize(size: string): any
 }
-class App {
+class App implements IAppState {
   @observable
   public sidebar = {
     opened: true,
@@ -27,24 +31,24 @@ class App {
   public size = 'medium'
 
   @action.bound
-  private ToggleSideBar(withoutAnimation: boolean) {
+  public ToggleSideBar(withoutAnimation: boolean) {
     this.sidebar.opened = !this.sidebar.opened
     this.sidebar.withoutAnimation = withoutAnimation
   }
 
   @action.bound
-  private CloseSideBar(withoutAnimation: boolean) {
+  public CloseSideBar(withoutAnimation: boolean) {
     this.sidebar.opened = false
     this.sidebar.withoutAnimation = withoutAnimation
   }
 
   @action.bound
-  private ToggleDevice(device: DeviceType) {
+  public ToggleDevice(device: DeviceType) {
     this.device = device
   }
 
   @action.bound
-  private SetSize(size: string) {
+  public SetSize(size: string) {
     this.size = size
   }
 }

@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { AppModule } from '@/layout/store/modules/app'
+import { AppModule, IAppState } from '@/layout/store/modules/app'
 import { TagsViewModule } from '@/layout/store/modules/tags-view'
 import { PermissionModule } from '@/layout/store/modules/permission'
 import { SettingsModule } from '@/layout/store/modules/settings'
@@ -41,51 +41,53 @@ import SidebarLogo from './SidebarLogo.vue'
   }
 })
 export default class extends Vue {
-  get sidebar() {
-    return AppModule.sidebar
-  }
+private AppModule: IAppState = AppModule
 
-  get routes() {
-    return PermissionModule.routes
-  }
+get sidebar() {
+  return this.AppModule.sidebar
+}
 
-  get showLogo() {
-    return SettingsModule.showSidebarLogo
-  }
+get routes() {
+  return PermissionModule.routes
+}
 
-  get menuBgColor() {
-    return SettingsModule.menuBgColor
-  }
+get showLogo() {
+  return SettingsModule.showSidebarLogo
+}
 
-  get menuTextColor() {
-    return SettingsModule.menuTextColor
-  }
+get menuBgColor() {
+  return SettingsModule.menuBgColor
+}
 
-  get menuActiveTextColor() {
-    return SettingsModule.menuActiveTextColor
-  }
+get menuTextColor() {
+  return SettingsModule.menuTextColor
+}
 
-  get activeTag() {
-    return TagsViewModule.activeTag
-  }
+get menuActiveTextColor() {
+  return SettingsModule.menuActiveTextColor
+}
 
-  get activeMenu() {
-    const route = this.$route
-    const { meta, path } = route
-    if (this.activeTag.norouter) {
-      console.log(this.activeTag.meta.activeMenu, '2')
-      return this.activeTag.meta.activeMenu
-    }
-    if (meta.activeMenu) {
-      return meta.activeMenu
-    }
-    return path
-  }
+get activeTag() {
+  return TagsViewModule.activeTag
+}
 
-  get isCollapse() {
-    console.log(this.sidebar.opened, '开启')
-    return !this.sidebar.opened
+get activeMenu() {
+  const route = this.$route
+  const { meta, path } = route
+  if (this.activeTag.norouter) {
+    console.log(this.activeTag.meta.activeMenu, '2')
+    return this.activeTag.meta.activeMenu
   }
+  if (meta.activeMenu) {
+    return meta.activeMenu
+  }
+  return path
+}
+
+get isCollapse() {
+  console.log(this.sidebar.opened, '开启')
+  return !this.sidebar.opened
+}
 }
 </script>
 

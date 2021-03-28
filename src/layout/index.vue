@@ -32,7 +32,7 @@ import defaultSettings, { ISettings, IStyCfg } from '@/layout/settings'
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { mixins } from 'vue-class-component'
 import { RouteConfig } from 'vue-router'
-import { DeviceType, AppModule } from '@/layout/store/modules/app'
+import { DeviceType, AppModule, IAppState } from '@/layout/store/modules/app'
 import { SettingsModule } from '@/layout/store/modules/settings'
 import { PermissionModule } from '@/layout/store/modules/permission'
 import { AppMain, Navbar, Sidebar, TagsView } from './components'
@@ -54,6 +54,8 @@ interface IConfig {
 })
 export default class extends mixins(ResizeMixin) {
   @Prop({ default: () => [] }) readonly config!: IConfig
+
+  private AppModule: IAppState = AppModule
 
   test = 0
 
@@ -79,7 +81,7 @@ export default class extends mixins(ResizeMixin) {
   }
 
   get sidebar() {
-    return AppModule.sidebar
+    return this.AppModule.sidebar
   }
 
   get appMain() {
@@ -111,7 +113,7 @@ export default class extends mixins(ResizeMixin) {
   }
 
   private handleClickOutside() {
-    AppModule.CloseSideBar(false)
+    this.AppModule.CloseSideBar(false)
   }
 
   private refresh() {
