@@ -50,8 +50,8 @@ import _ from 'lodash'
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { RouteConfig } from 'vue-router'
 import { AppModule, IAppState } from '@/layout/store/modules/app'
-import { PermissionModule } from '@/layout/store/modules/permission'
-import { TagsViewModule, ITagView } from '@/layout/store/modules/tags-view'
+import { PermissionModule, IPermissionState } from '@/layout/store/modules/permission'
+import { TagsViewModule, ITagView, ITagsViewState } from '@/layout/store/modules/tags-view'
 import { Scrollbar as ElScrollbar } from 'element-ui'
 import ScrollPane from './ScrollPane.vue'
 import Contextmenu from 'vue-contextmenujs'
@@ -66,6 +66,8 @@ Vue.use(Contextmenu)
 })
 export default class extends Vue {
   private AppModule: IAppState = AppModule
+  private PermissionModule: IPermissionState = PermissionModule
+  private TagsViewModule: ITagsViewState = TagsViewModule
   private visible = false
   private top = 0
   private left = 0
@@ -81,15 +83,15 @@ export default class extends Vue {
   }
 
   get visitedViews() {
-    return TagsViewModule.visitedViews
+    return this.TagsViewModule.visitedViews
   }
 
   get activeTag() {
-    return TagsViewModule.activeTag
+    return this.TagsViewModule.activeTag
   }
 
   get routes() {
-    return PermissionModule.routes
+    return this.PermissionModule.routes
   }
 
   get sidebar() {
@@ -123,7 +125,7 @@ export default class extends Vue {
 
     setTimeout(() => {
       console.log('即将添加非路由tag')
-      TagsViewModule.addView({
+      this.TagsViewModule.addView({
         norouter: true,
         name: '1',
         component: Test,
@@ -217,7 +219,7 @@ export default class extends Vue {
   }
 
   private setActiveTag(tag) {
-    TagsViewModule.addView(tag)
+    this.TagsViewModule.addView(tag)
   }
 
   private isActive(route: ITagView) {
@@ -258,7 +260,7 @@ export default class extends Vue {
     for (const tag of this.affixTags) {
       // Must have tag name
       if (tag.name) {
-        TagsViewModule.addVisitedView(tag)
+        this.TagsViewModule.addVisitedView(tag)
       }
     }
   }
@@ -266,7 +268,7 @@ export default class extends Vue {
   private addTags() {
     const { name } = this.$route
     if (name) {
-      TagsViewModule.addView(this.$route)
+      this.TagsViewModule.addView(this.$route)
     }
     this.scrollUpdate()
     return false
@@ -280,7 +282,7 @@ export default class extends Vue {
           (this.$refs.scrollPane as ScrollPane).moveToTarget(tag as any)
           // When query is different then update
           if ((tag.to as ITagView).fullPath !== this.$route.fullPath) {
-            TagsViewModule.updateVisitedView(this.$route)
+            this.TagsViewModule.updateVisitedView(this.$route)
           }
           break
         }
@@ -289,7 +291,7 @@ export default class extends Vue {
   }
 
   private refreshSelectedTag(view: ITagView) {
-    TagsViewModule.delCachedView(view)
+    this.TagsViewModule.delCachedView(view)
     const { fullPath } = view
     this.scrollUpdate()
     this.$emit('refresh')
@@ -305,9 +307,9 @@ export default class extends Vue {
   }
 
   private closeSelectedTag(view: ITagView) {
-    TagsViewModule.delView(view)
+    this.TagsViewModule.delView(view)
     if (this.isActive(view)) {
-      this.toLastView(TagsViewModule.visitedViews, view)
+      this.toLastView(this.TagsViewModule.visitedViews, view)
     }
     this.scrollUpdate()
   }
@@ -321,17 +323,17 @@ export default class extends Vue {
         console.warn(err)
       })
     }
-    TagsViewModule.delOthersViews(this.selectedTag)
+    this.TagsViewModule.delOthersViews(this.selectedTag)
     this.moveToCurrentTag()
     this.scrollUpdate()
   }
 
   private closeAllTags(view: ITagView) {
-    TagsViewModule.delAllViews()
+    this.TagsViewModule.delAllViews()
     if (this.affixTags.some(tag => tag.path === this.$route.path)) {
       return
     }
-    this.toLastView(TagsViewModule.visitedViews, view)
+    this.toLastView(this.TagsViewModule.visitedViews, view)
   }
 
   private toLastView(visitedViews: ITagView[], view: ITagView) {

@@ -33,8 +33,8 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 import { mixins } from 'vue-class-component'
 import { RouteConfig } from 'vue-router'
 import { DeviceType, AppModule, IAppState } from '@/layout/store/modules/app'
-import { SettingsModule } from '@/layout/store/modules/settings'
-import { PermissionModule } from '@/layout/store/modules/permission'
+import { SettingsModule, ISettingsState } from '@/layout/store/modules/settings'
+import { PermissionModule, IPermissionState } from '@/layout/store/modules/permission'
 import { AppMain, Navbar, Sidebar, TagsView } from './components'
 import ResizeMixin from './mixin/resize'
 
@@ -56,6 +56,8 @@ export default class extends mixins(ResizeMixin) {
   @Prop({ default: () => [] }) readonly config!: IConfig
 
   private AppModule: IAppState = AppModule
+  private PermissionModule: IPermissionState = PermissionModule
+  private SettingsModule: ISettingsState = SettingsModule
 
   test = 0
 
@@ -69,15 +71,15 @@ export default class extends mixins(ResizeMixin) {
   }
 
   get showBreadcrumb() {
-    return SettingsModule.showBreadcrumb
+    return this.SettingsModule.showBreadcrumb
   }
 
   get showTagsView() {
-    return SettingsModule.showTagsView
+    return this.SettingsModule.showTagsView
   }
 
   get fixedHeader() {
-    return SettingsModule.fixedHeader
+    return this.SettingsModule.fixedHeader
   }
 
   get sidebar() {
@@ -90,7 +92,7 @@ export default class extends mixins(ResizeMixin) {
 
   beforeMount() {
     // 设置菜单
-    PermissionModule.GenerateRoutes(this.config.routes)
+    this.PermissionModule.GenerateRoutes(this.config.routes)
 
     const setting = Object.assign(
       defaultSettings,
@@ -99,7 +101,7 @@ export default class extends mixins(ResizeMixin) {
     )
     // 传入设置
     for (const key in setting) {
-      SettingsModule.ChangeSetting({
+      this.SettingsModule.ChangeSetting({
         key: key,
         value: (setting as any)[key]
       })

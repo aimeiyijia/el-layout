@@ -35,12 +35,13 @@ import path from 'path'
 import Fuse from 'fuse.js' // A lightweight fuzzy-search module
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { RouteConfig } from 'vue-router'
-import { PermissionModule } from '@/layout/store/modules/permission'
+import { PermissionModule, IPermissionState } from '@/layout/store/modules/permission'
 
 @Component({
   name: 'HeaderSearch'
 })
 export default class extends Vue {
+  private PermissionModule: IPermissionState = PermissionModule
   private search = ''
   private show = false
   private options: RouteConfig[] = []
@@ -48,7 +49,7 @@ export default class extends Vue {
   private fuse?: Fuse<RouteConfig>
 
   get routes() {
-    return PermissionModule.routes
+    return this.PermissionModule.routes
   }
 
   @Watch('routes')

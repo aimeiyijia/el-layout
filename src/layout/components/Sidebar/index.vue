@@ -27,9 +27,9 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { AppModule, IAppState } from '@/layout/store/modules/app'
-import { TagsViewModule } from '@/layout/store/modules/tags-view'
-import { PermissionModule } from '@/layout/store/modules/permission'
-import { SettingsModule } from '@/layout/store/modules/settings'
+import { TagsViewModule, ITagsViewState } from '@/layout/store/modules/tags-view'
+import { PermissionModule, IPermissionState } from '@/layout/store/modules/permission'
+import { SettingsModule, ISettingsState } from '@/layout/store/modules/settings'
 import SidebarItem from './SidebarItem.vue'
 import SidebarLogo from './SidebarLogo.vue'
 
@@ -42,33 +42,36 @@ import SidebarLogo from './SidebarLogo.vue'
 })
 export default class extends Vue {
 private AppModule: IAppState = AppModule
+private PermissionModule: IPermissionState = PermissionModule
+private SettingsModule: ISettingsState = SettingsModule
+private TagsViewModule: ITagsViewState = TagsViewModule
 
 get sidebar() {
   return this.AppModule.sidebar
 }
 
 get routes() {
-  return PermissionModule.routes
+  return this.PermissionModule.routes
 }
 
 get showLogo() {
-  return SettingsModule.showSidebarLogo
+  return this.SettingsModule.showSidebarLogo
 }
 
 get menuBgColor() {
-  return SettingsModule.menuBgColor
+  return this.SettingsModule.menuBgColor
 }
 
 get menuTextColor() {
-  return SettingsModule.menuTextColor
+  return this.SettingsModule.menuTextColor
 }
 
 get menuActiveTextColor() {
-  return SettingsModule.menuActiveTextColor
+  return this.SettingsModule.menuActiveTextColor
 }
 
 get activeTag() {
-  return TagsViewModule.activeTag
+  return this.TagsViewModule.activeTag
 }
 
 get activeMenu() {

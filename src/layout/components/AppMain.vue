@@ -14,15 +14,16 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { TagsViewModule } from '@/layout/store/modules/tags-view'
+import { TagsViewModule, ITagsViewState } from '@/layout/store/modules/tags-view'
 
 @Component({
   name: 'AppMain'
 })
 export default class extends Vue {
+  private TagsViewModule: ITagsViewState = TagsViewModule
   isRouterAlive= true
   get cachedViews() {
-    return TagsViewModule.cachedViews
+    return this.TagsViewModule.cachedViews
   }
 
   get key() {
@@ -30,7 +31,7 @@ export default class extends Vue {
   }
 
   get activeTag() {
-    return TagsViewModule.activeTag
+    return this.TagsViewModule.activeTag
   }
 
   reload() {
