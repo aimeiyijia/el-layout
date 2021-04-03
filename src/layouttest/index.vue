@@ -7,7 +7,12 @@ import { Component, Vue } from 'vue-property-decorator'
 // import layout from '@/layout/index.vue'
 import { constantRoutes } from '@/router/index.ts'
 
-import { PassengerStoreModule } from '@/store/modules/passenger'
+import {
+  AppModule,
+  PermissionModule,
+  SettingsModule,
+  TagsViewModule
+} from '@/layout/index.js'
 
 @Component({
   name: 'layouttest'
@@ -15,7 +20,6 @@ import { PassengerStoreModule } from '@/store/modules/passenger'
 export default class extends Vue {
   get config() {
     return {
-      routes: constantRoutes,
       stycfg: {
         sideBarWidth: '210px'
       }
@@ -23,12 +27,7 @@ export default class extends Vue {
   }
 
   created() {
-    console.log(1)
-    // console.log(this)
-    // console.log(PassengerStoreModule.loginInfo) // state
-    // console.log(PassengerStoreModule.userNumber) // getter
-    // PassengerStoreModule.getZhangsan() // actions
-    // PassengerStoreModule.getLisi() // actions
+    PermissionModule.GenerateRoutes(constantRoutes)
   }
 }
 </script>

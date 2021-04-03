@@ -4,18 +4,17 @@ import VueRouter, { RouteConfig } from 'vue-router'
 Vue.use(VueRouter)
 
 const arr = []
-for (let i = 0; i < 20; i++){
+for (let i = 0; i < 20; i++) {
   arr.push({
-    path: 'directive0'+ i,
+    path: 'directive0' + i,
     component: () => import(/* webpackChunkName: "login" */ '@/views/login/index.vue'),
-    name: 'DirectivePermission0'+i,
+    name: 'DirectivePermission0' + i,
     meta: {
-      title: '测试子菜单0'+i,
+      title: '测试子菜单0' + i,
       roles: ['admin']
     }
-  },)
+  })
 }
-
 
 export const constantRoutes: RouteConfig[] = [
   {
@@ -45,7 +44,7 @@ export const constantRoutes: RouteConfig[] = [
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },
-      ...arr,
+      ...arr
     ]
   }
 ]

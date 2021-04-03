@@ -1,9 +1,5 @@
 import ElLayout from './index.vue'
-import ElLayoutStore from '@/layout/store'
-// AppModule,
-// PermissionModule,
-// SettingsModule,
-// TagsViewModule,
+
 import { AppModule } from './store/modules/app.ts'
 import { PermissionModule } from './store/modules/permission.ts'
 import { SettingsModule } from './store/modules/settings.ts'
@@ -28,12 +24,5 @@ if (GlobalVue) {
   GlobalVue.use(ElLayout)
 }
 
-// export default
-export {
-  ElLayout,
-  ElLayoutStore,
-  AppModule,
-  PermissionModule,
-  SettingsModule,
-  TagsViewModule
-}
+export default ElLayout
+export { AppModule, PermissionModule, SettingsModule, TagsViewModule }

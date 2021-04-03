@@ -21,38 +21,29 @@ export interface ISettingsState {
 
 class Settings implements ISettingsState {
   // 页面功能配置
-  @observable
   public fixedHeader = defaultSettings.fixedHeader
-  @observable
+
   public showTagsView = defaultSettings.showTagsView
-  @observable
+
   public showSidebarLogo = defaultSettings.showSidebarLogo
-  @observable
+
   public showBreadcrumb = defaultSettings.showBreadcrumb
 
   // 页面样式配置
-  @observable
   public sideBarWidth = defaultSettings.sideBarWidth
 
-  @observable
   public subMenuBgColor = defaultSettings.subMenuBgColor
 
-  @observable
   public subMenuHoverColor = defaultSettings.subMenuHoverColor
 
-  @observable
   public subMenuActiveTextColor = defaultSettings.subMenuActiveTextColor
 
-  @observable
   public menuBgColor = defaultSettings.menuBgColor
 
-  @observable
   public menuTextColor = defaultSettings.menuTextColor
 
-  @observable
   public menuActiveTextColor = defaultSettings.menuActiveTextColor
 
-  @observable
   public tagActiveColor = defaultSettings.tagActiveColor
 
   @action.bound

@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx'
 import { Route } from 'vue-router'
-import _ from "lodash"
+import _ from 'lodash'
 
 export interface ITagView extends Partial<Route> {
   title?: string
@@ -14,11 +14,13 @@ export interface ITagsViewState {
 
 class TagsView implements ITagsViewState {
   public visitedViews: ITagView[] = []
+
   public cachedViews: (string | undefined)[] = []
+
   public activeTag: ITagView = {}
 
   private ADD_ACTIVE_TAGS(view: ITagView) {
-      this.activeTag = view
+    this.activeTag = view
   }
 
   private ADD_VISITED_VIEW(view: ITagView) {
@@ -52,6 +54,7 @@ class TagsView implements ITagsViewState {
     const index = this.cachedViews.indexOf(view.name)
     index > -1 && this.cachedViews.splice(index, 1)
   }
+
   private DEL_OTHERS_VISITED_VIEWS(view: ITagView) {
     this.visitedViews = this.visitedViews.filter(v => {
       return v.meta.affix || v.path === view.path
@@ -97,6 +100,7 @@ class TagsView implements ITagsViewState {
 
   @action.bound
   public addVisitedView(view: ITagView) {
+    console.log(view, '345789')
     this.ADD_ACTIVE_TAGS(view)
     this.ADD_VISITED_VIEW(view)
   }

@@ -83,6 +83,7 @@ export default class extends Vue {
   }
 
   get visitedViews() {
+    console.log(this.TagsViewModule, '345')
     return this.TagsViewModule.visitedViews
   }
 

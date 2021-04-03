@@ -8,15 +8,15 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 import App from '@/App.vue'
 import router from '@/router'
+
 import store from '@/store'
 import '@/icons/components'
 
-// import { ElLayout, ElLayoutStore } from '../dist/el-layout.common.js'
-// import '../dist/el-layout.css'
-import { ElLayout, ElLayoutStore } from './layout/index.js'
+import ElLayout from '@/layout/index.js'
 import '@/layout/styles/index.scss'
 
 Vue.use(ElementUI)
+Vue.use(ElLayout)
 
 Vue.use(SvgIcon, {
   tagName: 'svg-icon',
@@ -24,12 +24,10 @@ Vue.use(SvgIcon, {
   defaultHeight: '1em'
 })
 
-Vue.use(ElLayout)
-
 Vue.config.productionTip = false
 
 new Vue({
   router,
-  store: Object.assign(store, ElLayoutStore),
+  store: store,
   render: h => h(App)
 }).$mount('#app')

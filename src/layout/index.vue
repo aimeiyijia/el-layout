@@ -34,7 +34,6 @@ import { mixins } from 'vue-class-component'
 import { RouteConfig } from 'vue-router'
 import { DeviceType, AppModule, IAppState } from '@/layout/store/modules/app'
 import { SettingsModule, ISettingsState } from '@/layout/store/modules/settings'
-import { PermissionModule, IPermissionState } from '@/layout/store/modules/permission'
 import { AppMain, Navbar, Sidebar, TagsView } from './components'
 import ResizeMixin from './mixin/resize'
 
@@ -56,7 +55,6 @@ export default class extends mixins(ResizeMixin) {
   @Prop({ default: () => [] }) readonly config!: IConfig
 
   private AppModule: IAppState = AppModule
-  private PermissionModule: IPermissionState = PermissionModule
   private SettingsModule: ISettingsState = SettingsModule
 
   test = 0
@@ -91,9 +89,6 @@ export default class extends mixins(ResizeMixin) {
   }
 
   beforeMount() {
-    // 设置菜单
-    this.PermissionModule.GenerateRoutes(this.config.routes)
-
     const setting = Object.assign(
       defaultSettings,
       this.config.stycfg,
