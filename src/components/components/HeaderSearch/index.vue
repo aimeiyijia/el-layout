@@ -31,14 +31,16 @@
 </template>
 
 <script lang="ts">
+import SvgIcon from 'vue-svgicon'
 import path from 'path'
 import Fuse from 'fuse.js' // A lightweight fuzzy-search module
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { RouteConfig } from 'vue-router'
-import { PermissionModule } from '@/components/layout/store/modules/permission'
+import { PermissionModule } from '@/components/store/modules/permission'
 
 @Component({
-  name: 'HeaderSearch'
+  name: 'HeaderSearch',
+  components: { SvgIcon }
 })
 export default class extends Vue {
   private search = ''

@@ -8,13 +8,15 @@
 </template>
 
 <script lang="ts">
+import SvgIcon from 'vue-svgicon'
 import screenfull from 'screenfull'
 import { Component, Vue } from 'vue-property-decorator'
 
 const sf = screenfull
 
 @Component({
-  name: 'Screenfull'
+  name: 'Screenfull',
+  components: { SvgIcon }
 })
 export default class extends Vue {
   private isFullscreen = false;

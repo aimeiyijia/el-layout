@@ -27,22 +27,21 @@
 <script lang="ts">
 import _ from 'lodash'
 import { Component, Vue } from 'vue-property-decorator'
-import { AppModule, IAppState } from '@/components/layout/store/modules/app'
+import { AppModule, IAppState } from '@/components/store/modules/app'
 import {
   TagsViewModule,
   ITagsViewState
-} from '@/components/layout/store/modules/tags-view'
+} from '@/components/store/modules/tags-view'
 import {
   PermissionModule,
   IPermissionState
-} from '@/components/layout/store/modules/permission'
+} from '@/components/store/modules/permission'
 import {
   SettingsModule,
   ISettingsState
-} from '@/components/layout/store/modules/settings'
+} from '@/components/store/modules/settings'
 import SidebarItem from './SidebarItem.vue'
 import SidebarLogo from './SidebarLogo.vue'
-import { UserModule } from '@/store/modules/user'
 import { RouteConfig } from 'vue-router'
 
 @Component({
@@ -63,65 +62,8 @@ export default class extends Vue {
   }
 
   get routes() {
-    const routes = _.cloneDeep(this.PermissionModule.routes)
-    const { userInfo } = UserModule
-    const { userRoleCode } = userInfo
-    if (userRoleCode === 'glr') {
-      const { isMajor } = userInfo.orgnizationUser
-      const userType = userInfo.orgnizationUser.orgnazationType
-      if (isMajor === 0 || (isMajor === 1 && userType === 3)) {
-        for (let i = 0; i < routes.length; i++) {
-          if (routes[i].path === '/?12') {
-            console.log(i)
-            routes.splice(i, 1)
-          }
-        }
-      }
-      // isqsz  0 工作组 1 清算组
-      const { tuWtjg } = userInfo
-      const { isqsz } = tuWtjg
-      if (isqsz === 1) {
-        for (let i = 0; i < routes.length; i++) {
-          if (routes[i].path === '/?12') {
-            for (
-              let j = 0;
-              j < (routes[i].children as RouteConfig[]).length;
-              j++
-            ) {
-              if (
-                (routes[i].children as RouteConfig[])[j].path === '/userReview'
-              ) {
-                (routes[i].children as RouteConfig[]).splice(j, 1)
-              }
-            }
-          }
-        }
-      }
-      // userType 2 机构管理人 3 个人管理人 4 普通用户 5 清算组成员
-      // 个人管理人 | 清算组成员 不显示 指定负责人申请
-      if (userType === 3 || userType === 5) {
-        routes.forEach(item => {
-          if (item.path === '/?2') {
-            for (let i = 0; i < (item.children as RouteConfig[]).length; i++) {
-              if ((item.children as RouteConfig[])[i].path === '/chargepersonList') {
-                (item.children as RouteConfig[]).splice(i, 1)
-              }
-            }
-          }
-        })
-      }
-    } else if (userRoleCode === 'xhr') {
-      // associationType 1-协会负责人 2-协会工作人员
-      const { associationType } = userInfo.associationUserEntity
-      if (associationType !== 1) {
-        for (let i = 0; i < routes.length; i++) {
-          if (routes[i].path === '/?11') {
-            routes.splice(i, 1)
-          }
-        }
-      }
-    }
-    return routes
+    console.log(this.PermissionModule.routes, '路由')
+    return this.PermissionModule.routes
   }
 
   get showLogo() {

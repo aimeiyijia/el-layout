@@ -26,7 +26,7 @@ import _ from 'lodash'
 import {
   TagsViewModule,
   ITagsViewState
-} from '@/components/layout/store/modules/tags-view'
+} from '@/components/store/modules/tags-view'
 
 @Component({
   name: 'AppMain'

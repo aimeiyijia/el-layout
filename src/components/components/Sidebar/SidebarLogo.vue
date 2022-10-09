@@ -9,17 +9,15 @@
           popper-class="sidebarPopover"
         >
           <div class="sidebar-desc">
-            <div class="sidebar-desc_title">{{ $gConfig.title }}</div>
+            <div class="sidebar-desc_title">{{ title }}</div>
           </div>
-          <img :src="$gConfig.logoUrl" class="sidebar-logo" slot="reference" />
+          <img :src="logoUrl" class="sidebar-logo" slot="reference" />
         </el-popover>
       </div>
       <div v-else key="expand" class="sidebar-logo-link">
-        <img :src="$gConfig.logoUrl" class="sidebar-logo" />
+        <img :src="logoUrl" class="sidebar-logo" />
         <div class="sidebar-desc" v-if="!collapse">
-          <div class="sidebar-desc_title">{{ $gConfig.title }}</div>
-          <div class="sidebar-desc_entitle">{{ $gConfig.englishTitle }}</div>
-          <div class="sidebar-desc_platform">{{ platformName }}</div>
+          <div class="sidebar-desc_title">{{ title }}</div>
         </div>
       </div>
     </transition>
@@ -31,7 +29,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 import {
   SettingsModule,
   ISettingsState
-} from '@/components/layout/store/modules/settings'
+} from '@/components/store/modules/settings'
 
 @Component({
   name: 'SidebarLogo'
@@ -40,6 +38,9 @@ export default class extends Vue {
   @Prop({ required: true }) private collapse!: boolean
 
   public SettingsModule: ISettingsState = SettingsModule
+
+  public title = '123456'
+  public logoUrl = ''
 
   get platformName() {
     return this.SettingsModule.platformName

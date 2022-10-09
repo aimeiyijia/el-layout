@@ -12,13 +12,18 @@
   },
   "dependencies": {
     "css-vars-ponyfill": "^2.4.8",
+    "fuse.js": "^6.6.2",
     "lodash": "^4.17.20",
     "mobx": "^6.6.2",
     "normalize.css": "^8.0.1",
+    "path-to-regexp": "^6.2.1",
+    "resize-detector": "^0.3.0",
+    "screenfull": "^5.2.0",
     "vue-class-component": "^7.2.6",
     "vue-contextmenujs": "^1.4.9",
     "vue-frag": "^1.4.1",
-    "vue-property-decorator": "^9.0.2"
+    "vue-property-decorator": "^9.0.2",
+    "vue-svgicon": "^3.2.9"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.14.5",
@@ -67,7 +72,7 @@
     "typescript": "3.8.3",
     "vue": "^2.6.12",
     "vue-cli-plugin-element": "^1.0.1",
-    "vue-router": "^3.6.5",
+    "vue-router": "^3.5.3",
     "vue-template-compiler": "^2.6.12",
     "webpack": "^4.4.2"
   },

@@ -24,7 +24,7 @@ export const constantRoutes: RouteConfig[] = [
   },
   {
     path: '/permission',
-    component: () => import(/* webpackChunkName: "login" */ '@/layouttest/index.vue'),
+    component: () => import(/* webpackChunkName: "login" */ '@/layout/index.vue'),
     redirect: '/permission/page',
     meta: {
       title: '测试父菜单',

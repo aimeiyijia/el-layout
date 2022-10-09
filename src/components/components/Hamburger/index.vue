@@ -12,10 +12,12 @@
 </template>
 
 <script lang="ts">
+import SvgIcon from 'vue-svgicon'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component({
-  name: 'Hamburger'
+  name: 'Hamburger',
+  components: { SvgIcon }
 })
 export default class extends Vue {
   @Prop({ default: false }) private isActive!: boolean

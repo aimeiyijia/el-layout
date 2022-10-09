@@ -1,35 +1,11 @@
 <template>
-  <el-layout :config="config"></el-layout>
+  <div id="app">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-// import layout from '@/layout/index.vue'
-import { constantRoutes } from '@/router'
-
-import {
-  AppModule,
-  PermissionModule,
-  SettingsModule,
-  TagsViewModule
-} from '@/layout/index.js'
-
-@Component({
-  name: 'layouttest'
-})
-export default class extends Vue {
-  get config() {
-    return {
-      stycfg: {
-        sideBarWidth: '210px'
-      }
-    }
-  }
-
-  created() {
-    PermissionModule.GenerateRoutes(constantRoutes)
-  }
-}
+export default {}
 </script>
 
 <style lang="scss">

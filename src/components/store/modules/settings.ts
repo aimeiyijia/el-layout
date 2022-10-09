@@ -1,5 +1,5 @@
 import { observable, action } from 'mobx'
-import defaultSettings from '@/components/layout/settings'
+import defaultSettings from '@/components/settings'
 
 export interface ISettingsState {
   fixedHeader: boolean

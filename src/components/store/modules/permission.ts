@@ -40,6 +40,7 @@ class Permission implements IPermissionState {
   @action.bound
   public GenerateRoutes(accessedRoutes: RouteConfig[]) {
     this.routes = filterRoutes(accessedRoutes)
+    console.log(this.routes, '7890')
   }
 }
 

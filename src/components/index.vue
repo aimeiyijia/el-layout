@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import '@/components/layout/styles/index.scss'
+import '@/components/styles/index.scss'
 import defaultSettings, {
   ISettings,
   IStyCfg
@@ -43,11 +43,11 @@ import {
   DeviceType,
   AppModule,
   IAppState
-} from '@/components/layout/store/modules/app'
+} from '@/components/store/modules/app'
 import {
   SettingsModule,
   ISettingsState
-} from '@/components/layout/store/modules/settings'
+} from '@/components/store/modules/settings'
 import { AppMain, Navbar, Sidebar, TagsView } from './components'
 import ResizeMixin from './mixin/resize'
 import cssVars from 'css-vars-ponyfill'

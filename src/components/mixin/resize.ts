@@ -1,5 +1,5 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
-import { AppModule, DeviceType, IAppState } from '@/components/layout/store/modules/app'
+import { AppModule, DeviceType, IAppState } from '@/components/store/modules/app'
 
 // 小于800为手机宽度
 const MOBILEWIDTHThRESHOLD = 800 // refer to Bootstrap's responsive design

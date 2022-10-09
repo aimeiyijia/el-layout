@@ -5,6 +5,8 @@ import { PermissionModule as LPermissionModule } from './store/modules/permissio
 import { SettingsModule as LSettingsModule } from './store/modules/settings'
 import { TagsViewModule as LTagsViewModule } from './store/modules/tags-view'
 
+declare module 'resize-detector'
+
 export default ElLayout
 
 export { LAppModule, LPermissionModule, LSettingsModule, LTagsViewModule }

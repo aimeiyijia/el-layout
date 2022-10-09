@@ -41,16 +41,16 @@ import {
   AppModule,
   DeviceType,
   IAppState
-} from '@/components/layout/store/modules/app'
+} from '@/components/store/modules/app'
 import {
   SettingsModule,
   ISettingsState
-} from '@/components/layout/store/modules/settings'
-import TagsView from '@/components/layout/components/TagsView/index.vue'
-import Breadcrumb from '@/components/layout/components/Breadcrumb/index.vue'
-import Hamburger from '@/components/layout/components/Hamburger/index.vue'
-import HeaderSearch from '@/components/layout/components/HeaderSearch/index.vue'
-import Screenfull from '@/components/layout/components/Screenfull/index.vue'
+} from '@/components/store/modules/settings'
+import TagsView from '@/components/components/TagsView/index.vue'
+import Breadcrumb from '@/components/components/Breadcrumb/index.vue'
+import Hamburger from '@/components/components/Hamburger/index.vue'
+import HeaderSearch from '@/components/components/HeaderSearch/index.vue'
+import Screenfull from '@/components/components/Screenfull/index.vue'
 
 @Component({
   name: 'Navbar',
@@ -268,8 +268,6 @@ export default class extends Vue {
     margin-left: 15px;
     width: 50px;
     height: 48px;
-    background: url('~@/assets/images/navbar/top_exit.png') left center
-      no-repeat;
     cursor: pointer;
   }
 }

@@ -55,10 +55,11 @@
 </template>
 
 <script lang="ts">
+import SvgIcon from 'vue-svgicon'
 import path from 'path'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { RouteConfig } from 'vue-router'
-import { isExternal } from '@/components/layout/utils/validate'
+import { isExternal } from '@/components/utils/validate'
 import SidebarItemLink from './SidebarItemLink.vue'
 
 @Component({
@@ -66,6 +67,7 @@ import SidebarItemLink from './SidebarItemLink.vue'
   // See https://medium.com/haiiro-io/element-component-name-with-vue-class-component-f3b435656561 for detail
   name: 'SidebarItem',
   components: {
+    SvgIcon,
     SidebarItemLink
   }
 })

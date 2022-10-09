@@ -49,20 +49,20 @@ import path from 'path'
 import _ from 'lodash'
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { RouteConfig } from 'vue-router'
-import { AppModule, IAppState } from '@/components/layout/store/modules/app'
+import { AppModule, IAppState } from '@/components/store/modules/app'
 import {
   PermissionModule,
   IPermissionState
-} from '@/components/layout/store/modules/permission'
+} from '@/components/store/modules/permission'
 import {
   TagsViewModule,
   ITagView,
   ITagsViewState
-} from '@/components/layout/store/modules/tags-view'
+} from '@/components/store/modules/tags-view'
 import {
   SettingsModule,
   ISettingsState
-} from '@/components/layout/store/modules/settings'
+} from '@/components/store/modules/settings'
 import ScrollPane from './ScrollPane.vue'
 import Contextmenu from 'vue-contextmenujs'
 Vue.use(Contextmenu)
